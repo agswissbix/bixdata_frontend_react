@@ -3,10 +3,4 @@ export interface CommonProps {
     // Add more shared props here
   }
   
-  export interface SidebarProps {
-    bixData: {
-      userId: number;
-      name: string;
-      email: string;
-    };
-  }
+ 

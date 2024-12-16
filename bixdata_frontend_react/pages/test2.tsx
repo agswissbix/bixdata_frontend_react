@@ -8,8 +8,8 @@ interface SidebarProps {
     email: string;
   };
 }
-
-export const getServerSideProps = createServerSidePropsFetcher<SidebarProps>('http://localhost:8000/backend_custom_test/test/',(data) => ({ bixData: data }));
+const menuName='testval';
+export const getServerSideProps = createServerSidePropsFetcher<SidebarProps>('http://localhost:8000/backend_custom_test/test/?par1='+menuName,(data) => ({ bixData: data }));
 
 // Mock data for testing
 const mockBixData = {
@@ -18,7 +18,7 @@ const mockBixData = {
     email: 'johndoe@example.com',
   };
 
-const SidebarPage: React.FC<SidebarProps> = ({ bixData = mockBixData }) => {
+const SidebarPage: React.FC<SidebarProps> = ({ bixData  }) => {
   return (
     <div>
       <h1>Welcome, {bixData.name}</h1>
