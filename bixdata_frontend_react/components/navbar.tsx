@@ -14,7 +14,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function NavbarComp() {
+export default function Navbar() {
     return (
         <Disclosure as="nav" className="bg-gray-800">
             <div className="mx-auto w-screen px-2 sm:px-6 lg:px-8">

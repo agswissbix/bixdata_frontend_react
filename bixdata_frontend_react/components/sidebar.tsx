@@ -55,7 +55,7 @@ const sidebarDataDEV: SidebarItem[] = [
     },
   ];
 
-const TableComp: React.FC<SidebarProps> = ({ onChangeComponent }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onChangeComponent }) => {
 
     const [sidebarData, setSidebarData] = useState<SidebarItem[]>([]);
     const [error, setError] = useState<string | null>(null); 
@@ -65,11 +65,11 @@ const TableComp: React.FC<SidebarProps> = ({ onChangeComponent }) => {
 
     useEffect(() => {
         console.info("sidebar.tsx")
+        setSidebarData(sidebarDataDEV);
         const fetchData = async () => {
             try {
                 const response = await axiosInstance.get('get_sidebar_data/');
                 //setData(response.data.message); 
-                setSidebarData(sidebarDataDEV);
             } catch (err) {
                 setError("Failed to fetch data");
                 console.error(err);
@@ -105,6 +105,7 @@ const TableComp: React.FC<SidebarProps> = ({ onChangeComponent }) => {
                         className="border-b border-gray-700 relative"
                         onMouseEnter={() => handleMouseEnter(item.id)}
                         onMouseLeave={handleMouseLeave}
+                        onClick={() => onChangeComponent(item.id)}
                     >
                         {item.subItems ? (
                             // Dropdown section
@@ -146,7 +147,9 @@ const TableComp: React.FC<SidebarProps> = ({ onChangeComponent }) => {
                                                 </a>
                                             </li>
                                             {item.subItems.map((subItem) => (
-                                                <li key={subItem.id}>
+                                                <li key={subItem.id} 
+                                                onClick={() => onChangeComponent(subItem.id)}
+                                                    >
                                                     <a
                                                         href={subItem.href}
                                                         className="block px-4 py-2 hover:bg-gray-600 transition-colors"
@@ -214,4 +217,4 @@ const TableComp: React.FC<SidebarProps> = ({ onChangeComponent }) => {
     );
 };
 
-export default TableComp;
+export default Sidebar;

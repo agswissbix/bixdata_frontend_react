@@ -2,6 +2,16 @@ interface TableCompProps {
     onRowClick: (id: number) => void;  // Funzione per gestire il clic sulla riga
 }
 
+
+interface TableRows {
+    name: string;
+    rows: TableRow[];
+}
+
+interface TableRow {
+    value: string;
+}
+
 const tablerows = [
     {
         id: 1,

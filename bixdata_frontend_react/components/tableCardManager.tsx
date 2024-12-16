@@ -2,13 +2,11 @@ import TableComp from "@/components/table";
 import CardComp from "@/components/card";
 import { useState } from "react";
 
+interface TableCardManagerProps {
+    tableid : string;
+}
 
-
-
-
-
-
-const TableCardManager: React.FC = () => {
+const TableCardManager: React.FC <TableCardManagerProps> = ({tableid}) => {
 
     const [openCards, setOpenCards] = useState<number[]>([]);
     const [closingCard, setClosingCard] = useState<number | null>(null);
@@ -32,6 +30,7 @@ const TableCardManager: React.FC = () => {
 
     return (
         <div className="w-full h-full p-2">
+            <p className="text-black">{tableid}</p>
             <TableComp onRowClick={handleRowClick} />
 
             {openCards.length > 0 && (

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import TestContent from '../components/testContent';
 import TestMenu from '../components/testMenu';
+import Sidebar from '../components/sidebar';
+import Navbar from '../components/navbar';
+import TableCardManager from '../components/tableCardManager';
+import '../app/globals.css';
 
 // Main App Component
 const App: React.FC = () => {
@@ -11,15 +15,13 @@ const App: React.FC = () => {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      {/* Left Menu */}
-      <div style={{ width: '20%', backgroundColor: '#f5f5f5' }}>
-        <TestMenu onMenuClick={handleMenuClick} />
-      </div>
-
-      {/* Right Content */}
-      <div style={{ width: '80%' }}>
-        <TestContent menuName={selectedMenu} />
+    <div className="w-screen h-screen">
+      <Navbar />
+      <div className="w-full h-full flex">
+          <Sidebar onChangeComponent={handleMenuClick} />
+          <div className="relative w-full h-full bg-gray-100">
+            <TableCardManager tableid={selectedMenu} />
+          </div>
       </div>
     </div>
   );
