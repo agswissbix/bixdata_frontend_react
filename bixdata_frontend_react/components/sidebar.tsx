@@ -65,11 +65,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onChangeComponent }) => {
 
     useEffect(() => {
         console.info("sidebar.tsx")
-        setSidebarData(sidebarDataDEV);
+        //setSidebarData(sidebarDataDEV);
         const fetchData = async () => {
             try {
                 const response = await axiosInstance.get('get_sidebar_data/');
-                //setData(response.data.message); 
+                setSidebarData(response.data); 
             } catch (err) {
                 setError("Failed to fetch data");
                 console.error(err);
