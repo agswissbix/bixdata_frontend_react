@@ -58,7 +58,7 @@ const sidebarDataDEV: SidebarItem[] = [
 const Sidebar: React.FC<SidebarProps> = ({ onChangeComponent }) => {
 
     const [sidebarData, setSidebarData] = useState<SidebarItem[]>([]);
-    const [error, setError] = useState<string | null>(null); 
+    const [error, setError] = useState<string | null>(null);
     const [openDropdown, setOpenDropdown] = useState('');
     const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
 
@@ -69,7 +69,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onChangeComponent }) => {
         const fetchData = async () => {
             try {
                 const response = await axiosInstance.get('get_sidebar_data/');
-                setSidebarData(response.data); 
+                setSidebarData(sidebarDataDEV);
             } catch (err) {
                 setError("Failed to fetch data");
                 console.error(err);
