@@ -13,7 +13,7 @@ const Login = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await axiosInstance.post('login/', { username, password });
+            await axiosInstance.post('backend_app/login/', { username, password });
             console.info('Login corretto');
             router.push('home'); // Reindirizza alla home dopo un login corretto
         } catch (error) {
