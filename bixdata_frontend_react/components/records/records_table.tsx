@@ -13,14 +13,40 @@ interface RecordsTableProps {
 }
 
 interface ResponseInterface {
-    responseExample1: number;
-    responseExample2: string;
+    rows: Array<{
+        id: number;
+        name: string;
+        color: string;
+        category: string;
+        price: string;
+    }>;
 }
 
 // RESPONSE DI ESEMPIO PER LO SVILUPPO
 const componentDataDEV: ResponseInterface = {
-    responseExample1: 123,
-    responseExample2: "test"
+    rows: [
+        {
+            id: 1,
+            name: 'Apple MacBook Pro 19"',
+            color: 'Silver',
+            category: 'Laptop',
+            price: '$2999',
+        },
+        {
+            id: 2,
+            name: 'Microsoft Surface Pro',
+            color: 'White',
+            category: 'Laptop PC',
+            price: '$1999',
+        },
+        {
+            id: 3,
+            name: 'Magic Mouse 2',
+            color: 'Black',
+            category: 'Accessories',
+            price: '$99',
+        },
+    ],
   };
 
 const RecordsTable: React.FC<RecordsTableProps> = ({ tableid }) => {
@@ -58,11 +84,47 @@ const RecordsTable: React.FC<RecordsTableProps> = ({ tableid }) => {
     return (
         // Usa il compontente generico per gestire gli stati di loading e di error
         <GenericComponent response={response} loading={loading} error={error}> 
-            {(response: ResponseInterface) => (
+            {(componentData: ResponseInterface) => (
                 <div>
-                    <p>
-                        <strong>Tabella risultati di:</strong> {tableid}
-                    </p>
+                    <div className="relative overflow-x-auto">
+                        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3">
+                                        Product name
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Color
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Category
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Price
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {componentData.rows.map((row) => (
+                                    <tr key={row.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {row.name}
+                                        </th>
+                                        <td className="px-6 py-4">
+                                            {row.color}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {row.category}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {row.price}
+                                        </td>
+                                    </tr>
+                                ))}
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             )}
         </GenericComponent>
