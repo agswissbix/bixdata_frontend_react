@@ -21,7 +21,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             response = await axiosInstance.post('/backend_custom_test/testpost/', postData);
         } else if (postData.apiRoute === 'get_sidebarmenu_items') {
             response = await axiosInstance.post('/backend_app/get_sidebarmenu_items/', postData);
-        } else {
+        }else if (postData.apiRoute === 'get_table_records') {
+            response = await axiosInstance.post('/backend_app/get_table_records/', postData);
+        } 
+        else {
             return res.status(400).json({ error: 'Invalid apiRoute provided.' });
         }
 

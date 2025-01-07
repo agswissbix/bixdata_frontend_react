@@ -123,12 +123,12 @@ const componentDataDEV: ResponseInterface = {
   
   const RecordsTable: React.FC<RecordsTableProps> = ({ tableid }) => {
     // Dati da usare nel componente
-    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEV);
+    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEFAULT);
 
     // Dati da inviare al backend
     const payload = useMemo(() => ({
-        apiRoute: 'testpost', // riferimento api per il backend
-        tableid: {tableid},
+        apiRoute: 'get_table_records', // riferimento api per il backend
+        tableid: tableid,
         additionalInfo: {
             example: 'example',
         },
@@ -138,7 +138,8 @@ const componentDataDEV: ResponseInterface = {
     const { response, loading, error } = useApi<ResponseInterface>(payload);
     useEffect(() => {
         if (response) {
-            //setComponentData(response);
+            console.info(response)
+            setComponentData(response);
         }
     }, [response]);
     
