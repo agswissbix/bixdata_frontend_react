@@ -97,20 +97,20 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({setSelectedMenu}) => {
     const { response, loading, error } = useApi<ResponseData>(payload);
 
     // USA I DATI DI TEST NEL FRONTEND
-    /*
+    
     useEffect(() => {
         setSidebarMenuData(sidebarMenuDataDEV);
     }, []); 
-    */
+    
 
     // USA I DATI DAL BACKEND
-    
+    /*
     useEffect(() => {
         if (response) {
             setSidebarMenuData(response);
         }
     }, [response]);
-    
+    */
     
 
 

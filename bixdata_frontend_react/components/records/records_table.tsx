@@ -6,6 +6,8 @@ import { useApi } from '../../utils/useApi';
 import GenericComponent from '../genericComponent';
 
 
+// INTERFACCE
+
 interface RecordsTableProps {
     tableid?: string;
     search?: string;
@@ -22,7 +24,12 @@ interface ResponseInterface {
     }>;
 }
 
-// RESPONSE DI ESEMPIO PER LO SVILUPPO
+// DATI DI DEFAULT
+const componentDataDEFAULT: ResponseInterface = {
+    rows: []
+  };
+
+// DATI DI ESEMPIO PER LO SVILUPPO
 const componentDataDEV: ResponseInterface = {
     rows: [
         {
@@ -48,43 +55,33 @@ const componentDataDEV: ResponseInterface = {
         },
     ],
   };
+  
+  const RecordsTable: React.FC<RecordsTableProps> = ({ tableid }) => {
+    // Dati da usare nel componente
+    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEV);
 
-const RecordsTable: React.FC<RecordsTableProps> = ({ tableid }) => {
     // Dati da inviare al backend
     const payload = useMemo(() => ({
         apiRoute: 'testpost', // riferimento api per il backend
         tableid: {tableid},
         additionalInfo: {
-            example2: 'example',
-            example3: 'example',
+            example: 'example',
         },
     }), [tableid]);
 
-    // Usa l'hook passando il payload per recuperare i dati dal backend
+    // Richiama il backend
     const { response, loading, error } = useApi<ResponseInterface>(payload);
-
-    //Dati da usare nel componente
-    const [componentData, setComponentData] = useState<ResponseInterface>();
-
-    // Usa la response di esempio per lo sviluppo
-        useEffect(() => {
-            setComponentData(componentDataDEV);
-        }, []); 
-    
-    
-    // Usa la response del backend
-    /*
     useEffect(() => {
         if (response) {
-            setComponentData(response);
+            //setComponentData(response);
         }
     }, [response]);
-    */
+    
 
     return (
         // Usa il compontente generico per gestire gli stati di loading e di error
-        <GenericComponent response={response} loading={loading} error={error}> 
-            {(componentData: ResponseInterface) => (
+        <GenericComponent response={componentData} loading={loading} error={error}> 
+            {(data) => (
                 <div>
                     <div className="relative overflow-x-auto">
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -105,7 +102,7 @@ const RecordsTable: React.FC<RecordsTableProps> = ({ tableid }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {componentData.rows.map((row) => (
+                                {data.rows.map((row) => (
                                     <tr key={row.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {row.name}
