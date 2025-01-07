@@ -19,7 +19,7 @@ const App: React.FC = () => {
       <Navbar />
       <div className="w-full h-full flex">
           <Sidebar setSelectedMenu={(item) => setSelectedMenu(item)} />
-          <div className="relative w-full h-full bg-gray-100">
+          <div className="relative w-full bg-gray-100">
             {selectedMenu === 'Calendar' ? (
               <ScheduleCalendar />
             ) : (
