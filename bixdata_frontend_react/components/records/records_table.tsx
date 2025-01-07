@@ -16,11 +16,14 @@ interface RecordsTableProps {
 
 interface ResponseInterface {
     rows: Array<{
-        id: number;
-        name: string;
-        color: string;
-        category: string;
-        price: string;
+        recordid: string;
+        css: string;
+        fields: Array<{
+            recordid?: string;
+            css: string;
+            type: string;
+            value: string;
+        }>
     }>;
     columns: Array<{
         fieldtypeid: string;
@@ -38,25 +41,64 @@ const componentDataDEFAULT: ResponseInterface = {
 const componentDataDEV: ResponseInterface = {
     rows: [
         {
-            id: 1,
-            name: 'Apple MacBook Pro 19"',
-            color: 'Silver',
-            category: 'Laptop',
-            price: '$2999',
+            recordid: "1",
+            css: "#",
+            fields: [
+                {
+                    recordid: "",
+                    css: "",
+                    type: "standard",
+                    value: "macbook"
+                },
+                {
+                    recordid: "",
+                    css: "",
+                    type: "standard",
+                    value: "nero"
+                },
+                {
+                    recordid: "",
+                    css: "",
+                    type: "standard",
+                    value: "Laptop"
+                },
+                {
+                    recordid: "",
+                    css: "",
+                    type: "standard",
+                    value: "2k"
+                },
+            ]
         },
         {
-            id: 2,
-            name: 'Microsoft Surface Pro',
-            color: 'White',
-            category: 'Laptop PC',
-            price: '$1999',
-        },
-        {
-            id: 3,
-            name: 'Magic Mouse 2',
-            color: 'Black',
-            category: 'Accessories',
-            price: '$99',
+            recordid: "2",
+            css: "#",
+            fields: [
+                {
+                    recordid: "",
+                    css: "",
+                    type: "standard",
+                    value: "surface",
+                },
+                {
+                    recordid: "",
+                    css: "",
+                    type: "standard",
+                    value: "bianco",
+                },
+                {
+                    recordid: "",
+                    css: "",
+                    type: "standard",
+                    value: "Laptop",
+                },
+                {
+                    recordid: "",
+                    css: "",
+                    type: "standard",
+                    value: "1k",
+                },
+            ]
         },
     ],
     columns: [
@@ -120,19 +162,12 @@ const componentDataDEV: ResponseInterface = {
                             </thead>
                             <tbody>
                                 {data.rows.map((row) => (
-                                    <tr key={row.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {row.name}
-                                        </th>
-                                        <td className="px-6 py-4">
-                                            {row.color}
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            {row.category}
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            {row.price}
-                                        </td>
+                                    <tr key={row.recordid} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        {row.fields.map((field) => (
+                                            <td className="px-6 py-4">
+                                                {field.value}
+                                            </td>
+                                        ))}
                                     </tr>
                                 ))}
 
