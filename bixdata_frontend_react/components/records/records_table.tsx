@@ -22,11 +22,16 @@ interface ResponseInterface {
         category: string;
         price: string;
     }>;
+    columns: Array<{
+        fieldtypeid: string;
+        desc: string;
+    }>;
 }
 
 // DATI DI DEFAULT
 const componentDataDEFAULT: ResponseInterface = {
-    rows: []
+    rows: [],
+    columns: [],
   };
 
 // DATI DI ESEMPIO PER LO SVILUPPO
@@ -52,6 +57,24 @@ const componentDataDEV: ResponseInterface = {
             color: 'Black',
             category: 'Accessories',
             price: '$99',
+        },
+    ],
+    columns: [
+        {
+            fieldtypeid: "Numero",
+            desc: 'Product name'
+        },
+        {
+            fieldtypeid: "Numero",
+            desc: 'Color'
+        },
+        {
+            fieldtypeid: "Numero",
+            desc: 'Type'
+        },
+        {
+            fieldtypeid: "Numero",
+            desc: 'Price'
         },
     ],
   };
@@ -87,18 +110,12 @@ const componentDataDEV: ResponseInterface = {
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col" className="px-6 py-3">
-                                        Product name
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Color
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Category
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Price
-                                    </th>
+                                    {data.columns.map((column) => (
+                                        
+                                        <th scope="col" className="px-6 py-3" key={column.fieldtypeid}>
+                                            {column.desc}
+                                            </th>
+                                        ))}
                                 </tr>
                             </thead>
                             <tbody>

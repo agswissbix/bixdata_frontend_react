@@ -14,7 +14,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-full h-full">
       <Navbar />
       <div className="w-full h-full flex">
           <Sidebar setSelectedMenu={(item) => setSelectedMenu(item)} />
