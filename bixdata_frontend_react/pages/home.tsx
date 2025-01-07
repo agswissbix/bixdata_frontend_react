@@ -4,6 +4,7 @@ import Navbar from '../components/navbar';
 import TableCardManager from '../components/tableCardManager';
 import '../app/globals.css';
 import StandardContent from '@/components/pageContent/standardContent';
+import ScheduleCalendar from  '@/components/test/calendar';
 
 // Main App Component
 const App: React.FC = () => {
@@ -19,12 +20,24 @@ const App: React.FC = () => {
       <div className="w-full h-full flex">
           <Sidebar setSelectedMenu={(item) => setSelectedMenu(item)} />
           <div className="relative w-full h-full bg-gray-100">
-            <StandardContent tableid={selectedMenu}></StandardContent>
-            {/*<TableCardManager tableid={selectedMenu} />*/}
-          </div>
+            {selectedMenu === 'Calendar' ? (
+              <ScheduleCalendar />
+            ) : (
+              <StandardContent tableid={selectedMenu} />
+            )}
+        </div>
       </div>
     </div>
   );
 };
+
+{/*
+<div className="relative w-full h-full bg-gray-100">
+  <StandardContent tableid={selectedMenu}></StandardContent>
+  QUESTA RIGA COMMENTATA
+  <TableCardManager tableid={selectedMenu} />
+  QUESTA RIGA COMMENTATA
+</div>
+*/}
 
 export default App;
