@@ -4,16 +4,16 @@ import RecordTabs from '../records/records_tabs';
 import RecordFilters from '../records/records_filters';
 
 interface ContentProps {
-  selectedMenu: string;
+  tableid: string;
 }
 
-const StandardContent: React.FC<ContentProps> = ({ selectedMenu }) => {
+const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
   return (
     <div>
       <h2>Contenuto</h2>
-      <p>Hai selezionato: <strong>{selectedMenu}</strong></p>
+      <p>Hai selezionato: <strong>{tableid}</strong></p>
       <div><RecordFilters></RecordFilters></div>
-      <div><RecordTabs></RecordTabs></div>
+      <div><RecordTabs tableid={tableid}></RecordTabs></div>
     </div>
   );
 };

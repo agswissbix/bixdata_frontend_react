@@ -1,14 +1,17 @@
 import React, { useMemo } from 'react';
 import '../../app/globals.css';
-
+import RecordsTable from './records_table';
 interface RecordTabsProps {
-  propExample?: string; // Prop ora è opzionale
+  tableid?: string; // Prop ora è opzionale
 }
 
-const RecordTabs: React.FC<RecordTabsProps> = ({ propExample }) => {
+const RecordTabs: React.FC<RecordTabsProps> = ({ tableid }) => {
   return (
     <div>
-        Record tabs
+        Record tabs: {tableid}
+        <div>
+          <RecordsTable tableid={tableid}></RecordsTable>
+        </div>
     </div>
   );
 };

@@ -19,7 +19,7 @@ const App: React.FC = () => {
       <div className="w-full h-full flex">
           <Sidebar setSelectedMenu={(item) => setSelectedMenu(item)} />
           <div className="relative w-full h-full bg-gray-100">
-            <StandardContent selectedMenu={selectedMenu}></StandardContent>
+            <StandardContent tableid={selectedMenu}></StandardContent>
             {/*<TableCardManager tableid={selectedMenu} />*/}
           </div>
       </div>
