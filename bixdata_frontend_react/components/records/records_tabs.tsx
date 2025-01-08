@@ -2,10 +2,11 @@ import React, { useMemo } from 'react';
 import '../../app/globals.css';
 import RecordsTable from './records_table';
 interface RecordTabsProps {
-  tableid?: string; // Prop ora è opzionale
+  tableid?: string; 
+  searchTerm?: string;
 }
 
-const RecordTabs: React.FC<RecordTabsProps> = ({ tableid, handleRowClick }) => {
+const RecordTabs: React.FC<RecordTabsProps> = ({ tableid, searchTerm, handleRowClick }) => {
   return (
     
     <div className="h-full w-full">
@@ -20,7 +21,7 @@ const RecordTabs: React.FC<RecordTabsProps> = ({ tableid, handleRowClick }) => {
           </ul>
         </div>
         <div id='records-tab-content'>
-          <RecordsTable tableid={tableid} handleRowClick={handleRowClick}></RecordsTable>
+          <RecordsTable tableid={tableid} searchTerm={searchTerm} handleRowClick={handleRowClick}></RecordsTable>
         </div>
     </div>
   );

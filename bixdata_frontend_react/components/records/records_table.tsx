@@ -10,7 +10,7 @@ import GenericComponent from '../genericComponent';
 
 interface RecordsTableProps {
     tableid?: string;
-    search?: string;
+    searchTerm?: string;
     filters?: string;
 }
 
@@ -121,7 +121,8 @@ const componentDataDEV: ResponseInterface = {
     ],
   };
   
-  const RecordsTable: React.FC<RecordsTableProps> = ({ tableid, handleRowClick }) => {
+
+  const RecordsTable: React.FC<RecordsTableProps> = ({ tableid, searchTerm, handleRowClick }) => {
     // Dati da usare nel componente
     const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEFAULT);
 
@@ -129,6 +130,7 @@ const componentDataDEV: ResponseInterface = {
     const payload = useMemo(() => ({
         apiRoute: 'get_table_records', // riferimento api per il backend
         tableid: tableid,
+        searchTerm: searchTerm,
         additionalInfo: {
             example: 'example',
         },
@@ -149,6 +151,7 @@ const componentDataDEV: ResponseInterface = {
         <GenericComponent response={componentData} loading={loading} error={error}> 
             {(data) => (
                 <div>
+                    test:{searchTerm}
                     <div className="relative overflow-x-auto">
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
