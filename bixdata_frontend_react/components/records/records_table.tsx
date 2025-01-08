@@ -156,16 +156,15 @@ const componentDataDEV: ResponseInterface = {
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     {data.columns.map((column) => (
-                                        
-                                        <th scope="col" className="px-6 py-3" >
+                                        <th scope="" className="px-6 py-3">
                                             {column.desc}
-                                            </th>
-                                        ))}
+                                        </th>
+                                    ))}
                                 </tr>
                             </thead>
                             <tbody>
                                 {data.rows.map((row) => (
-                                    <tr key={row.recordid} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         {row.fields.map((field) => (
                                             <td className="px-6 py-4">
                                                 {field.value}
@@ -173,14 +172,12 @@ const componentDataDEV: ResponseInterface = {
                                         ))}
                                     </tr>
                                 ))}
-
                             </tbody>
                         </table>
                     </div>
                 </div>
             )}
         </GenericComponent>
-
     );
 };
 

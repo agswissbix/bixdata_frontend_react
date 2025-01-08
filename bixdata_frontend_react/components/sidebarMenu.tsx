@@ -21,8 +21,6 @@ interface MenuItem {
     href: string;
   }
   
-
-  
   interface ResponseData {
     menuItems: Record<string, MenuItem>;
   }
@@ -112,9 +110,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({setSelectedMenu}) => {
     }, [response]);
     
     
-
-
-
     return (
         //usa il compontente generico per gestire gli stati di loading e di error
         <GenericComponent response={response} loading={loading} error={error}> 
