@@ -9,7 +9,7 @@ interface ContentProps {
 
 const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
   return (
-    <div className="h-full w-full shadow-2xl bg-white  rounded-lg p-4 m-4">
+    <div className="h-full w-full shadow-2xl bg-white rounded-lg p-4">
       {/*
       <h2>Contenuto</h2>
       <p>Hai selezionato: <strong>{tableid}</strong></p>

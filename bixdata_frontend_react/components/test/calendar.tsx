@@ -97,7 +97,7 @@ const ScheduleCalendar = () => {
   }));
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-4">
+    <div className="w-full max-w-6xl mx-auto p-4 overflow-scroll">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
         <div className="flex flex-wrap items-center gap-2">
           <select 
