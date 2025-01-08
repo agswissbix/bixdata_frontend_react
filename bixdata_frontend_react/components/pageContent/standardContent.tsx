@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, React} from 'react';
 import '../../app/globals.css';
 import RecordTabs from '../records/records_tabs';
 import RecordFilters from '../records/records_filters';
@@ -8,7 +8,17 @@ interface ContentProps {
 }
 
 const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
+  
+  const [recordid, setRecordid] = useState('')
+
+  const handleRowClick = (item: string) => {
+    // Gestione interna del click
+    setRecordid(item); // Comunica al componente padre la selezione
+    console.log(item)
+  };
+
   return (
+
     <div className="h-full w-full shadow-2xl bg-white rounded-lg p-4">
       {/*
       <h2>Contenuto</h2>
@@ -25,8 +35,12 @@ const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
         </div>  
       </div>
 
+      <div className="bg-white relative w-56">
+      
+      </div>
 
-      <div><RecordTabs tableid={tableid}></RecordTabs></div>
+
+      <div><RecordTabs tableid={tableid} handleRowClick={handleRowClick}></RecordTabs></div>
 
       <nav aria-label="Page navigation example" className="text-center">
         <ul className="inline-flex text-sm">

@@ -5,7 +5,7 @@ interface RecordTabsProps {
   tableid?: string; // Prop ora è opzionale
 }
 
-const RecordTabs: React.FC<RecordTabsProps> = ({ tableid }) => {
+const RecordTabs: React.FC<RecordTabsProps> = ({ tableid, handleRowClick }) => {
   return (
     
     <div className="h-full w-full">
@@ -20,7 +20,7 @@ const RecordTabs: React.FC<RecordTabsProps> = ({ tableid }) => {
           </ul>
         </div>
         <div id='records-tab-content'>
-          <RecordsTable tableid={tableid}></RecordsTable>
+          <RecordsTable tableid={tableid} handleRowClick={handleRowClick}></RecordsTable>
         </div>
     </div>
   );
