@@ -15,11 +15,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full flex flex-col">
       <Navbar />
-      <div className="w-full h-full flex">
+      <div className="w-full flex-1 flex">
           <Sidebar setSelectedMenu={(item) => setSelectedMenu(item)} />
-          <div className="relative w-full bg-gray-100">
+          <div className="relative h-full w-11/12 bg-gray-100">
             {selectedMenu === 'Calendar' ? (
               <ScheduleCalendar />
             ) : (

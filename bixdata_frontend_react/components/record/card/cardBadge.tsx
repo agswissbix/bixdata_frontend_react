@@ -40,7 +40,7 @@ const CardBadge: React.FC = () => {
     const [badgeItems, setBadgeItems] = React.useState<BadgeItem[]>(mockBixData);
 
     return (
-        <div className="h-full w-full bg-gray-100 flex justify-center items-center">
+        <div className="h-1/3 w-full bg-gray-100 flex justify-center items-center">
             <div className="flex flex-wrap justify-center w-full h-3/6">
                 {badgeItems.map((item) => (
                     <p key={item.fieldid} className="w-1/3 text-center text-black">

@@ -55,7 +55,7 @@ const mockBixData: Field[] = [
 const CardFields: React.FC = () => {
     const [fields, setFields] = React.useState<Field[]>(mockBixData);
     return (
-        <div>
+        <div className="h-2/3">
             <div style={{ display: 'flex' }}>
                 <div style={{ flex: 1 }}>
                     {fields.map(field => (

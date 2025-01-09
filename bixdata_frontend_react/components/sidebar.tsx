@@ -16,7 +16,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({setSelectedMenu}) => {
 
     return (
-        <div> 
+        <div className="w-1/12 h-full"> 
            <SidebarMenu setSelectedMenu={(item) => setSelectedMenu(item)} ></SidebarMenu>
         </div>
     );

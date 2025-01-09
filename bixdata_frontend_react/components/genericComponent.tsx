@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingComp from './loading';
 
 interface GenericComponentProps<T> {
     response?: T | null; // Optional
@@ -13,7 +14,7 @@ const GenericComponent = <T,>({
     error = null,
     children,
 }: GenericComponentProps<T>) => {
-    if (loading) return <div>Caricamento...</div>;
+    if (loading) return <LoadingComp />;
     if (error) return <div>Errore: {error}</div>;
     if (!response) return <div>Nessun dato disponibile.</div>;
 

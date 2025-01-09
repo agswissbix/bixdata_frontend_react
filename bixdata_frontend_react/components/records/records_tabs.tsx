@@ -4,6 +4,7 @@ import RecordsTable from './records_table';
 interface RecordTabsProps {
   tableid?: string; 
   searchTerm?: string;
+  handleRowClick?: (recordid : string) => void;
 }
 
 const RecordTabs: React.FC<RecordTabsProps> = ({ tableid, searchTerm, handleRowClick }) => {

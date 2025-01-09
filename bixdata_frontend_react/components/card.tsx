@@ -1,8 +1,8 @@
 import { CircleX, Maximize2, Minimize2 } from 'lucide-react';
 import { Toaster, toast } from 'sonner';
 import React, { use, useState } from 'react';
-import CardBadge from './cardBadge';
-import CardFields from './cardFields';
+import CardBadge from '../components/record/card/cardBadge';
+import CardFields from '../components/record/card/cardFields';
 import CardLinked from './cardLinked';
 
 interface CardCompProps {

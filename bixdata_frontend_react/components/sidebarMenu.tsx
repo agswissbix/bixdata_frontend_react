@@ -115,8 +115,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({setSelectedMenu}) => {
         <GenericComponent response={response} loading={loading} error={error}> 
             {(data) => (
                 
-                        <div className="bg-gray-800 text-white h-screen
-                                    xl:w-64 w-16 transition-all duration-300">
+                        <div className="bg-gray-800 text-white h-full xl:w-full w-full transition-all duration-300">
                             <ul className="list-none p-0 m-0">
                             <span className="block px-12 py-2 hover:bg-gray-700 transition-colors" onClick={() => handleMenuClick('Calendar')}> 
                                                     Calendar

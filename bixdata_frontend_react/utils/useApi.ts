@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRecordsStore } from '@/components/records/recordsStore';
 
 export const useApi = <T>(
     payload: Record<string, any>
@@ -6,6 +7,7 @@ export const useApi = <T>(
     const [response, setResponse] = useState<T | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const { refreshTable } = useRecordsStore();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +36,7 @@ export const useApi = <T>(
             }
         };
 
+            console.log('Fetching data with payload:', payload, 'refreshTable:', refreshTable);
         fetchData();
     }, [payload]);
 

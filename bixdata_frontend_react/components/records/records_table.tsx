@@ -4,7 +4,7 @@ import {useEffect} from "react";
 import '../../app/globals.css';
 import { useApi } from '../../utils/useApi';
 import GenericComponent from '../genericComponent';
-
+import {useRecordsStore} from './recordsStore';
 
 // INTERFACCE
 
@@ -12,6 +12,7 @@ interface RecordsTableProps {
     tableid?: string;
     searchTerm?: string;
     filters?: string;
+    handleRowClick?: (recordid : string) => void;
 }
 
 interface ResponseInterface {
@@ -126,6 +127,8 @@ const componentDataDEV: ResponseInterface = {
     // Dati da usare nel componente
     const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEFAULT);
 
+    const {refreshTable} = useRecordsStore();
+
     // Dati da inviare al backend
     const payload = useMemo(() => ({
         apiRoute: 'get_table_records', // riferimento api per il backend
@@ -134,10 +137,11 @@ const componentDataDEV: ResponseInterface = {
         additionalInfo: {
             example: 'example',
         },
-    }), [tableid]);
+    }), [refreshTable, tableid]);
 
     // Richiama il backend
     const { response, loading, error } = useApi<ResponseInterface>(payload);
+
     useEffect(() => {
         if (response) {
             console.info(response)
@@ -145,14 +149,13 @@ const componentDataDEV: ResponseInterface = {
         }
     }, [response]);
     
-
     return (
         // Usa il compontente generico per gestire gli stati di loading e di error
-        <GenericComponent response={componentData} loading={loading} error={error}> 
+        <GenericComponent response={componentData} loading={loading} error={error}>
             {(data) => (
                 <div>
                     test:{searchTerm}
-                    <div className="relative overflow-x-auto">
+                    <div className="w-full relative overflow-auto">
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -165,7 +168,7 @@ const componentDataDEV: ResponseInterface = {
                             </thead>
                             <tbody>
                                 {data.rows.map((row) => (
-                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" onClick={() => handleRowClick(row.recordid)}>
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" onClick={() => handleRowClick && handleRowClick(row.recordid)}>
                                         {row.fields.map((field) => (
                                             <td className="px-6 py-4">
                                                 {field.value}
