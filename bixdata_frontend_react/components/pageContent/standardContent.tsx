@@ -56,7 +56,7 @@ const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
       </div>
 
       {recordid !== '' && (
-        <RecordCard />
+        <RecordCard recordid={recordid}/>
       )}
 
 
