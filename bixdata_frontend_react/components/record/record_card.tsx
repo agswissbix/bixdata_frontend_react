@@ -4,13 +4,15 @@ import CardBadge from './card/cardBadge';
 import CardFields from './card/cardFields';
 
 interface RecordCardProps {
-  recordid?: string; // Prop ora è opzionale
+    tableid: string; // Prop ora è opzionale
+    recordid: string; // Prop ora è opzionale
 }
 
-const RecordCard: React.FC<RecordCardProps> = ({ recordid }) => {
+const RecordCard: React.FC<RecordCardProps> = ({ tableid ,recordid }) => {
   return (
     <div className="absolute right-0 w-96 h-4/6 bg-gray-100 z-10 rounded-md animate-slide-in">
       { recordid }
+      { tableid }
         <div className=" h-1/6 w-full">
             <button className="cursor-pointer w-6 h-6 flex items-center justify-center transition-colors">
             <CircleX className="w-8 h-8 text-red-500 hover:text-red-700" />
@@ -18,7 +20,7 @@ const RecordCard: React.FC<RecordCardProps> = ({ recordid }) => {
             </button>
         </div>
 
-        <CardBadge></CardBadge>
+        <CardBadge tableid={tableid} recordid={recordid}></CardBadge>
         <CardFields></CardFields>
     </div>
   );

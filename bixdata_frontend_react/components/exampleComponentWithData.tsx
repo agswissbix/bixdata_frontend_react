@@ -57,8 +57,8 @@ const ExampleComponentWithData: React.FC<propsInterface> = ({ propExample }) => 
 
     return (
         // Usa il compontente generico per gestire gli stati di loading e di error
-        <GenericComponent response={response} loading={loading} error={error}> 
-            {(response: ResponseInterface) => (
+        <GenericComponent response={componentData} loading={loading} error={error}> 
+            {(data: ResponseInterface) => (
                 //html del compontente in cui si possono usare sia i props che i dati ricevuti dal backend
                 <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
                 <h1>Profile</h1>
@@ -66,7 +66,7 @@ const ExampleComponentWithData: React.FC<propsInterface> = ({ propExample }) => 
                     <strong>Menu Item Selected:</strong> {propExample}
                 </p>
                 <p>
-                    <strong>menuItemBackend:</strong> {response.dataExample1}
+                    <strong>menuItemBackend:</strong> {data.dataExample1}
                 </p>
                 </div>
             )}
