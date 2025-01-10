@@ -6,10 +6,8 @@ const WorkSchedule = () => {
   const [selectedVolunteer, setSelectedVolunteer] = useState('');
   const [shifts, setShifts] = useState([]);
 
-  // Lista dei volontari disponibili
   const volunteers = ['SILVIA', 'GABRIELE', 'RENATA', 'ANAIS', 'GRAZIANO'];
 
-  // Funzione per generare le date nel range selezionato
   const getDatesInRange = (start, end) => {
     const dates = [];
     const currentDate = new Date(start);
@@ -22,7 +20,6 @@ const WorkSchedule = () => {
     return dates;
   };
 
-  // Funzione per generare i turni di default per ogni giorno
   const generateShifts = (date) => {
     const defaultShifts = [
       { time: '07.30-11.30', location: 'Lugano', person: 'SILVIA' },
@@ -39,12 +36,10 @@ const WorkSchedule = () => {
     }));
   };
 
-  // Aggiorna i turni quando cambiano le date o il volontario selezionato
   useEffect(() => {
     const dates = getDatesInRange(startDate, endDate);
     let allShifts = dates.flatMap(date => generateShifts(date));
     
-    // Filtra i turni per il volontario selezionato
     if (selectedVolunteer) {
       allShifts = allShifts.filter(shift => shift.person === selectedVolunteer);
     }
@@ -52,7 +47,6 @@ const WorkSchedule = () => {
     setShifts(allShifts);
   }, [startDate, endDate, selectedVolunteer]);
 
-  // Formatta la data in italiano
   const formatDate = (date) => {
     const months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
     const days = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
@@ -66,9 +60,9 @@ const WorkSchedule = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      {/* Header con filtri */}
-      <div className="flex gap-4 mb-6 items-center">
+    <div className="flex flex-col h-full w-1/2 mx-auto">
+      {/* Header con filtri - fisso */}
+      <div className="flex gap-4 mb-6 items-center p-4">
         <div className="flex items-center gap-2">
           <span className="text-gray-600">Da:</span>
           <input 
@@ -104,46 +98,50 @@ const WorkSchedule = () => {
         </select>
       </div>
 
-      {/* Tabella turni */}
-      <div className="border rounded-lg overflow-hidden">
+      {/* Container tabella con scroll */}
+      <div className="flex-1 overflow-hidden border rounded-lg">
+        {/* Header tabella - fisso */}
         <div className="grid grid-cols-3 bg-blue-600 text-white">
           <div className="p-4 font-semibold"></div>
           <div className="p-4 font-semibold text-center">Orario</div>
           <div className="p-4 font-semibold">Osservazioni</div>
         </div>
 
-        {shifts.length > 0 ? (
-          <div className="divide-y">
-            {shifts.map((shift, index) => {
-              const dateInfo = formatDate(new Date(shift.date));
-              return (
-                <div key={index} className="grid grid-cols-3">
-                  <div className="p-4 bg-blue-200">
-                    <div className="text-center">
-                      <div className="text-sm">{dateInfo.year}</div>
-                      <div className="font-bold text-lg">{dateInfo.month}</div>
-                      <div className="text-2xl font-bold">{dateInfo.day}</div>
-                      <div className="text-sm">{dateInfo.weekDay}</div>
+        {/* Contenuto tabella - scrollabile */}
+        <div className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+          {shifts.length > 0 ? (
+            <div className="divide-y">
+              {shifts.map((shift, index) => {
+                const dateInfo = formatDate(new Date(shift.date));
+                return (
+                  <div key={index} className="grid grid-cols-3">
+                    <div className="p-4 bg-blue-200">
+                      <div className="text-center">
+                        <div className="text-sm">{dateInfo.year}</div>
+                        <div className="font-bold text-lg">{dateInfo.month}</div>
+                        <div className="text-2xl font-bold">{dateInfo.day}</div>
+                        <div className="text-sm">{dateInfo.weekDay}</div>
+                      </div>
+                    </div>
+                    
+                    <div className="p-4">
+                      <div className="font-medium">{shift.location}</div>
+                      <div className="text-gray-600">{shift.time}</div>
+                    </div>
+                    
+                    <div className="p-4 text-gray-700">
+                      {shift.person}
                     </div>
                   </div>
-                  
-                  <div className="p-4">
-                    <div className="font-medium">{shift.location}</div>
-                    <div className="text-gray-600">{shift.time}</div>
-                  </div>
-                  
-                  <div className="p-4 text-gray-700">
-                    {shift.person}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="p-8 text-center text-gray-500">
-            Nessun turno trovato per il volontario selezionato in questo periodo
-          </div>
-        )}
+                );
+              })}
+            </div>
+          ) : (
+            <div className="p-8 text-center text-gray-500">
+              Nessun turno trovato per il volontario selezionato in questo periodo
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
