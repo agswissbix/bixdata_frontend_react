@@ -8,6 +8,7 @@ import {useRecordsStore} from '../records/recordsStore';
 import CardBadge from '../record/card/cardBadge';
 import CardFields from '../record/card/cardFields';
 import { Card } from '../calendars/ui/card';
+import RecordCard from '../record/record_card';
 
 import { CircleX, Maximize2, Minimize2 } from 'lucide-react';
 
@@ -55,17 +56,7 @@ const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
       </div>
 
       {recordid !== '' && (
-        <div className="absolute right-0 w-96 h-4/6 bg-gray-100 z-10 rounded-md animate-slide-in">
-          <div className=" h-1/6 w-full">
-          <button className="cursor-pointer w-6 h-6 flex items-center justify-center transition-colors">
-            <CircleX className="w-4 h-4 text-red-500 hover:text-red-700" />
-            <Maximize2 className="w-4 h-4 text-gray-500 hover:text-gray-700" />
-          </button>
-          </div>
-            {recordid}
-            <CardBadge></CardBadge>
-            <CardFields></CardFields>
-        </div>
+        <RecordCard />
       )}
 
 
