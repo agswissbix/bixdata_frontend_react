@@ -6,25 +6,31 @@ import { useApi } from '../utils/useApi';
 import GenericComponent from './genericComponent';
 
 
-interface ExampleComponentProps {
+interface propsInterface {
     propExample?: string;
 }
 
 interface ResponseInterface {
-    responseExample1: number;
-    responseExample2: string;
+    dataExample1: number;
+    dataExample2: string;
 }
 
 // RESPONSE DI ESEMPIO PER LO SVILUPPO
-const componentDataDEV: ResponseInterface = {
-    responseExample1: 123,
-    responseExample2: "test"
+const componentDataDEFAULT: ResponseInterface = {
+    dataExample1: 0,
+    dataExample2: ""
   };
 
-const ExampleComponentWithData: React.FC<ExampleComponentProps> = ({ propExample }) => {
+// RESPONSE DI ESEMPIO PER LO SVILUPPO
+const componentDataDEV: ResponseInterface = {
+    dataExample1: 123,
+    dataExample2: "test"
+  };
+
+const ExampleComponentWithData: React.FC<propsInterface> = ({ propExample }) => {
 
     //Dati da usare nel componente
-    const [componentData, setComponentData] = useState<ResponseInterface>();
+    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEFAULT);
 
     // Dati da inviare al backend
     const payload = useMemo(() => ({
@@ -39,12 +45,7 @@ const ExampleComponentWithData: React.FC<ExampleComponentProps> = ({ propExample
     // Usa l'hook passando il payload
     const { response, loading, error } = useApi<ResponseInterface>(payload);
 
-    // Usa la response di esempio per lo sviluppo
-        useEffect(() => {
-            setComponentData(componentDataDEV);
-        }, []); 
-    
-    
+
     // Usa la response del backend
     /*
     useEffect(() => {
@@ -65,7 +66,7 @@ const ExampleComponentWithData: React.FC<ExampleComponentProps> = ({ propExample
                     <strong>Menu Item Selected:</strong> {propExample}
                 </p>
                 <p>
-                    <strong>menuItemBackend:</strong> {response.responseExample1}
+                    <strong>menuItemBackend:</strong> {response.dataExample1}
                 </p>
                 </div>
             )}
