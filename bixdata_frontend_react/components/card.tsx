@@ -78,7 +78,7 @@ const CardComp: React.FC<CardCompProps> = ({
                                     z-10 absolute top-0 bg-white rounded-lg shadow-xl 
                                     transition-all duration-300 ease-out border border-gray-300 
                                     w-full h-full cursor-default 
-                                    ${isClosing ? 'transform translate-x-16 opacity-0' : ''}    
+                                    ${isClosing ? 'transform translate-x-16 opacity-0' : ''}
                                 `}
                                 style={{
                                     transform: !isFullscreen ? `translateX(${index * -30}px) translateY(${index * 15}px) rotate(${index * -2}deg)` : 'none',

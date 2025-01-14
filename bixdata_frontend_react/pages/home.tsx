@@ -6,6 +6,8 @@ import '../app/globals.css';
 import StandardContent from '@/components/pageContent/standardContent';
 import ScheduleCalendar from  '@/components/test/calendar';
 import Agenda from '@/components/calendars/agenda';
+import { Toaster, toast } from 'sonner';
+
 
 // Main App Component
 const App: React.FC = () => {
@@ -17,6 +19,7 @@ const App: React.FC = () => {
 
   return (
     <div className="w-full h-full flex flex-col">
+      <Toaster richColors />
       <Navbar />
       <div className="w-full flex-1 flex">
           <Sidebar setSelectedMenu={(item) => setSelectedMenu(item)} />

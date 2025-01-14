@@ -1,7 +1,6 @@
 import { CircleX, Maximize2, Minimize2 } from 'lucide-react';
 import { useState } from 'react';
 import CardBadge from './card/cardBadge';
-import CardFields from './card/cardFields';
 import CardTabs from './card/cardTabs';
 
 interface RecordCardProps {
@@ -23,6 +22,7 @@ const RecordCard: React.FC<RecordCardProps> = ({ tableid ,recordid }) => {
 
         <CardBadge tableid={tableid} recordid={recordid}></CardBadge>
         <CardTabs tableid={tableid} recordid={recordid}></CardTabs>
+
     </div>
   );
 };
