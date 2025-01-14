@@ -54,16 +54,17 @@ const CardBadge: React.FC<propsInterface> = (tableid, recordid) => {
 
     const payload = useMemo(() => ({
         apiRoute: 'testpost', // riferimento api per il backend
-        example1: tableid,
-        additionalInfo: {
-            example2: 'example',
-            example3: 'example',
-        },
+        tableid: tableid,
+        recordid: recordid
     }), [tableid]);
 
     // Usa l'hook passando il payload
     const { response, loading, error } = useApi<ResponseInterface>(payload);
-
+    useEffect(() => {
+        if (response) {
+            //setComponentData(response);
+        }
+    }, [response]);
 
     return (
         <GenericComponent response={componentData} loading={loading} error={error}> 

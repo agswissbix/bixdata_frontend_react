@@ -23,6 +23,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             response = await axiosInstance.post('/backend_app/get_sidebarmenu_items/', postData);
         }else if (postData.apiRoute === 'get_table_records') {
             response = await axiosInstance.post('/backend_app/get_table_records/', postData);
+        }else if (postData.apiRoute === 'get_record_badge') {
+            response = await axiosInstance.post('/backend_app/get_record_badge/', postData);
         }else if (postData.apiRoute === 'set_record_fields') {
             response = await axiosInstance.post('/backend_app/set_record_fields/', postData);
         }

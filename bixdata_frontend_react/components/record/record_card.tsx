@@ -9,6 +9,8 @@ interface RecordCardProps {
 }
 
 const RecordCard: React.FC<RecordCardProps> = ({ tableid ,recordid }) => {
+  console.log('tableid:', tableid);
+  console.log('recordid:', recordid);
   return (
     <div className="absolute right-0 w-96 h-4/6 bg-gray-100 z-10 rounded-md animate-slide-in">
       { recordid }
