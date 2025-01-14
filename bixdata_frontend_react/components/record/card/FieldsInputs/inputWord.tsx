@@ -8,19 +8,18 @@ interface InputWordProps {
 const InputWord: React.FC<InputWordProps> = ({ initialValue = '', onChange }) => {
   const [value, setValue] = useState(initialValue);
 
-  // Aggiorna il genitore quando il valore cambia
+  // Aggiorna il genitore solo se il valore è effettivamente diverso
   useEffect(() => {
-    if (onChange) {
+    if (onChange && value !== initialValue) {
       onChange(value);
     }
-  }, [value, onChange]);
+  }, [value, onChange, initialValue]);
 
   return (
     <div>
       <div className="mt-2">
         <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
           <input
-            id="word"
             name="word"
             type="text"
             value={value}

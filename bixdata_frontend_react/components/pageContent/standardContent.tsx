@@ -21,13 +21,22 @@ const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
   
   const [recordid, setRecordid] = useState('')
 
-  const handleRowClick = (recordid: string) => {
-    // Gestione interna del click
-    setRecordid(recordid); // Comunica al componente padre la selezione
-  };
 
   const [searchTerm, setSearchTerm] = useState(''); // Stato per il valore di ricerca
   const {refreshTable, setRefreshTable} = useRecordsStore(); // Stato per il valore di ricerca
+
+  const {cardsList, addCard, removeCard, resetCardsList} = useRecordsStore(); // Stato per il valore di ricerca
+
+  const handleRowClick = (recordid: string) => {
+    setRecordid(recordid); // Comunica al componente padre la selezione
+    const tableType = 'standard';
+    if (tableType === 'standard') {
+    //remove all cards in the cardlist with removeCard
+    resetCardsList();
+    //add the new card to the cardlist with addCard
+    addCard(tableid, recordid, tableType);
+    }
+  };
 
   // Funzione callback per aggiornare la ricerca
   const handleSearchChange = (searchTerm: string) => {
@@ -55,9 +64,9 @@ const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
         </div>  
       </div>
 
-      {recordid !== '' && (
-        <RecordCard tableid={tableid} recordid={recordid}/>
-      )}
+        {cardsList.map(card => (
+          <RecordCard tableid={card.tableid} recordid={card.recordid}></RecordCard>
+        ))}
 
 
       <div><RecordTabs tableid={tableid} searchTerm={searchTerm} handleRowClick={handleRowClick}></RecordTabs></div>
