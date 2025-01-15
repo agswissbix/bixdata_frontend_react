@@ -170,7 +170,6 @@ const CalendarComponent = () => {
         </div>
       </DialogContent>
     </Dialog>
-
   );
 
   const renderEvent = (event: Event) => (
