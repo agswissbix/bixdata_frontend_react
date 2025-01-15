@@ -40,7 +40,7 @@ const componentDataDEV: ResponseInterface = {
         {
             fieldid: "test3",
             description: "Test 3",
-            value: "2022-01-01",
+            value: "",
             fieldtype: "Data"
         },
         {
