@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useEffect} from "react";
 import { useApi } from '../../../utils/useApi';
 import GenericComponent from '../../genericComponent';
+import { consoleDebug } from '../../../utils/develop'
 
 interface propsInterface {
     tableid: string;
@@ -49,27 +50,28 @@ const componentDataDEFAULT: ResponseInterface = {
     badgeItems: []
   };
 
-const CardBadge: React.FC<propsInterface> = (tableid, recordid) => {
-    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEV);
+
+const CardBadge: React.FC<propsInterface> = ({ tableid, recordid }) => {
+    consoleDebug('CardBadge tableid', tableid);
+    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEFAULT);
 
     const payload = useMemo(() => ({
-        apiRoute: 'testpost', // riferimento api per il backend
+        apiRoute: 'get_record_badge', // riferimento api per il backend
         tableid: tableid,
         recordid: recordid
-    }), [tableid]);
+    }), [tableid, recordid]);
 
     // Usa l'hook passando il payload
     const { response, loading, error } = useApi<ResponseInterface>(payload);
     useEffect(() => {
         if (response) {
-            //setComponentData(response);
+            setComponentData(response);
         }
     }, [response]);
 
     return (
         <GenericComponent response={componentData} loading={loading} error={error}> 
             {(data: ResponseInterface) => (
-                
                 <div className="h-1/3 w-full bg-gray-100 flex justify-center items-center">
                     <div className="flex flex-wrap justify-center w-full h-3/6">
                         {data.badgeItems.map((item) => (
