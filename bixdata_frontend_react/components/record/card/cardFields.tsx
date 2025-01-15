@@ -7,6 +7,7 @@ import InputWord from './FieldsInputs/inputWord';
 import InputNumber from './FieldsInputs/inputNumber';
 import InputDate from './FieldsInputs/inputDate';
 import InputMemo from './FieldsInputs/inputMemo';
+import InputCheckbox from './FieldsInputs/inputCheckbox';
 import SelectUser from './FieldsInputs/selectUser';
 import SelectStandard from './FieldsInputs/selectStandard';
 import { Toaster, toast } from 'sonner';
@@ -97,6 +98,15 @@ const componentDataDEV: ResponseInterface = {
                 {itemcode: '1', itemdesc: 'Item 1', link: 'item', linkfield: 'id', linkvalue: '1', linkedfield: 'id', linkedvalue: '1'},
                 {itemcode: '2', itemdesc: 'Item 2', link: 'item', linkfield: 'id', linkvalue: '2', linkedfield: 'id', linkedvalue: '2'}
             ],
+            settings: {calcolato: 'false', default: '', nascosto: 'false', obbligatorio: 'false'}
+        },
+        {
+            tableid: "1",
+            fieldid: "test7",
+            fieldorder: "7",
+            description: "Test 7",
+            value: { code: 'test77', value: 'test7' },
+            fieldtype: "Checkbox",
             settings: {calcolato: 'false', default: '', nascosto: 'false', obbligatorio: 'false'}
         }
     ]
@@ -193,6 +203,11 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
                                 />
                             ) : field.fieldtype === 'Memo' ? (
                                 <InputMemo 
+                                    initialValue={typeof field.value === 'object' ? field.value.code : field.value} 
+                                    onChange={(value: string) => handleInputChange(field.fieldid, value)} 
+                                />
+                            ) : field.fieldtype === 'Checkbox' ? (
+                                <InputCheckbox 
                                     initialValue={typeof field.value === 'object' ? field.value.code : field.value} 
                                     onChange={(value: string) => handleInputChange(field.fieldid, value)} 
                                 />

@@ -88,11 +88,11 @@ const CalendarComponent = () => {
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+    (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   };
 
   const handleDragLeave = (e: React.DragEvent) => {
-    e.currentTarget.style.backgroundColor = '';
+    (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';
   };
 
   const handleAddEvent = () => {
@@ -170,6 +170,7 @@ const CalendarComponent = () => {
         </div>
       </DialogContent>
     </Dialog>
+
   );
 
   const renderEvent = (event: Event) => (

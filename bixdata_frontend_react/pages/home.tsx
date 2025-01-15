@@ -6,6 +6,7 @@ import '../app/globals.css';
 import StandardContent from '@/components/pageContent/standardContent';
 import ScheduleCalendar from  '@/components/test/calendar';
 import Agenda from '@/components/calendars/agenda';
+import CalendarComponent from '@/components/calendars/calendar';
 import { Toaster, toast } from 'sonner';
 
 
@@ -27,7 +28,7 @@ const App: React.FC = () => {
           {selectedMenu === 'Calendar' ? (
             <ScheduleCalendar />
           ) : selectedMenu === 'Agenda' ? (
-            <Agenda />
+            <CalendarComponent />
           ) : (
             <StandardContent tableid={selectedMenu} />
           )}
