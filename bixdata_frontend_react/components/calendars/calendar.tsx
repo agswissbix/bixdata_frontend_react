@@ -4,7 +4,7 @@ import { Button } from "@/components/calendars/ui/button";
 import { Input } from "@/components/calendars/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/calendars/ui/dialog";
 import { Calendar, Clock, Plus } from 'lucide-react';
-import '../../app/globals.css';
+
 
 
 type Event = {

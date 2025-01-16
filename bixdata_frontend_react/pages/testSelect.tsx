@@ -46,7 +46,7 @@ const App = () => {  // Changed 'app' to 'App'
         classNamePrefix="select"
         value={selectedOption}
         onChange={handleChange}
-        isSearchable={true}
+        isSearchable={true} 
         options={colourOptions}
       ></Select>
     </div>

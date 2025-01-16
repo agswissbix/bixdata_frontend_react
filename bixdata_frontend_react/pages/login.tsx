@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import axiosInstance from '../utils/axios';
 import Image from 'next/image';
 import '../app/globals.css';
+import { Toaster, toast } from 'sonner';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -17,14 +18,15 @@ const Login = () => {
             console.info('Login corretto');
             router.push('home'); // Reindirizza alla home dopo un login corretto
         } catch (error) {
-            alert('Credenziali sbagliate');
-            console.error('Errore durante il Login', error);
+            toast.error('Credenziali non valide');
+            //console.error('Errore durante il Login', error);
         }
     };
 
     return (
         <>
-            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+            <Toaster richColors />
+            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
                 <div className=" block sm:mx-auto sm:w-full sm:max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-white-800 dark:border-gray-200 mx-auto ">
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                         <Image
@@ -53,7 +55,7 @@ const Login = () => {
                                         onChange={(e) => setUsername(e.target.value)}
                                         required
                                         autoComplete="on"
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-bixcolor-light sm:text-sm/6"
+                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-bixcolor-light sm:text-sm/6 p-4"
                                     />
                                 </div>
                             </div>
@@ -76,7 +78,7 @@ const Login = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
                                         autoComplete="on"
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-bixcolor-light sm:text-sm/6"
+                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-bixcolor-light sm:text-sm/6 p-4"
                                     />
                                 </div>
                             </div>

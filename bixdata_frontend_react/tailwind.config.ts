@@ -9,6 +9,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        bixcolor: {
+  				default: '#074048',
+  				light: '#006664'
+  			},
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
