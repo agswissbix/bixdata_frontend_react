@@ -174,7 +174,7 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
         <GenericComponent response={componentData} loading={loading} error={error}> 
         {(data: ResponseInterface) => (
             
-            <div className="h-2/3">
+            <div className="h-full">
                 <div className="h-full flex flex-row">
                     <div className="flex-1 flex flex-col">
                         {data.fields.map(field => (
