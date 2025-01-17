@@ -37,7 +37,7 @@ const RecordCard: React.FC<RecordCardProps> = ({ tableid, recordid }) => {
   return (
     <div
     className={`absolute shadow-2xl right-0 mr-4 bg-gray-100 z-10 rounded-md p-3 ${animationClass} ${
-      isMaximized ? ' right-0 w-5/6 h-4/6' : 'w-1/6 h-4/6'
+      isMaximized ? ' right-0 w-5/6 h-5/6' : 'w-2/6 h-4/6'
     } transition-all duration-300`}
   >
     Record card mountedTime: {mountedTime}
