@@ -1,4 +1,4 @@
-import { CircleX, Maximize2 } from 'lucide-react';
+import { CircleX, Maximize2, Info } from 'lucide-react';
 import { useState } from 'react';
 import {useEffect} from "react";
 import CardBadge from './card/cardBadge';
@@ -43,15 +43,24 @@ const RecordCard: React.FC<RecordCardProps> = ({ tableid, recordid }) => {
     Record card mountedTime: {mountedTime}
       <div className="h-1/5 w-full">
         <div className='h-1/6 w-full flex justify-between items-center'>
-          <p className="text-black">{recordid}</p>
-          <p className="text-black">{tableid}</p>
-          <button className="cursor-pointer w-6 h-6 flex items-center justify-center transition-colors" onClick={handleRemoveCard} >
-            <CircleX className="w-8 h-8 text-red-500 hover:text-red-700" />
-            </button>
+          <div className="flex">
+            <p className="text-black">{recordid}</p>
+            <p className="text-black">{tableid}</p>
+          </div>
+          <div className="flex items-center gap-5">
 
-            <button onClick={() => setIsMaximized(!isMaximized)}>
-            <Maximize2 className="w-4 h-4 text-gray-500 hover:text-gray-700"  />
-            </button>
+              <button onClick={() => setIsMaximized(!isMaximized)}>
+                <Info className="w-8 h-8 text-gray-500 hover:text-gray-700" />
+              </button>
+
+              <button onClick={() => setIsMaximized(!isMaximized)}>
+                <Maximize2 className="w-8 h-8 text-gray-500 hover:text-gray-700" />
+              </button>
+
+              <button className="cursor-pointer w-6 h-6 flex items-center justify-center transition-colors" onClick={handleRemoveCard}>
+                <CircleX className="w-8 h-8 text-red-500 hover:text-red-700" />
+              </button>
+          </div>
         </div>
         <div className="h-5/6">
           <CardBadge tableid={tableid} recordid={recordid}></CardBadge>
