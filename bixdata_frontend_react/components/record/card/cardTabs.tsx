@@ -43,7 +43,7 @@ const CardTabs: React.FC<CardTabsProps> = ({ tableid, recordid }) => {
         </ul>
       </div>
 
-      <div className="h-5/6 p-4 overflow-scroll">
+      <div className="h-5/6 p-4">
         {activeTab === 'Fields' ? (
           <CardFields tableid={tableid} recordid={recordid} />
         ) : (

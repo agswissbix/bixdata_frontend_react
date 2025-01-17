@@ -105,7 +105,7 @@ const CardLinkedToChange: React.FC<propsInterface> = ({ masterTableid, masterRec
     return (
         <GenericComponent response={componentData} loading={loading} error={error}>
             {(data) => (
-                <div className="h-full w-full flex flex-col">
+                <div className="h-full w-full flex flex-col overflow-y-scroll">
                     {data.linkedTables.map((table, index) => (
                         <>
                             <div 

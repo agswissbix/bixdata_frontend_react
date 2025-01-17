@@ -47,18 +47,44 @@ const RecordCard: React.FC<RecordCardProps> = ({ tableid, recordid }) => {
             <p className="text-black">{recordid}</p>
             <p className="text-black">{tableid}</p>
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5"> 
 
-              <button onClick={() => setIsMaximized(!isMaximized)}>
-                <Info className="w-8 h-8 text-gray-500 hover:text-gray-700" />
+
+
+          <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" type="button">Funzioni<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+          </button>
+
+          <div id="dropdown" className="z-1000 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+              <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                <li>
+                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                </li>
+                <li>
+                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                </li>
+                <li>
+                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                </li>
+                <li>
+                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                </li>
+              </ul>
+          </div>
+
+
+
+          <button onClick={() => setIsMaximized(!isMaximized)}>
+                <Info className="w-6 h-6 text-gray-500 hover:text-gray-700" />
               </button>
 
               <button onClick={() => setIsMaximized(!isMaximized)}>
-                <Maximize2 className="w-8 h-8 text-gray-500 hover:text-gray-700" />
+                <Maximize2 className="w-6 h-6 text-gray-500 hover:text-gray-700" />
               </button>
 
               <button className="cursor-pointer w-6 h-6 flex items-center justify-center transition-colors" onClick={handleRemoveCard}>
-                <CircleX className="w-8 h-8 text-red-500 hover:text-red-700" />
+                <CircleX className="w-6 h-6 text-red-500 hover:text-red-700" />
               </button>
           </div>
         </div>
