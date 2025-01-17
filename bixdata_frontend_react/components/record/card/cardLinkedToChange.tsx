@@ -4,6 +4,7 @@ import { useApi } from '../../../utils/useApi';
 import GenericComponent from '../../genericComponent';
 import { ChevronDown } from 'lucide-react';
 import RecordsTable from '../../records/records_table';
+import { useRecordsStore } from '../../records/recordsStore';
 
 interface propsInterface {
     masterTableid: string,
@@ -118,7 +119,7 @@ const CardLinkedToChange: React.FC<propsInterface> = ({ masterTableid, masterRec
                                 </div>
                             </div>
                             <div className={`w-full h-96 max-h-96 border border-gray-300  rounded-md shadow animate-slide-in ${!openCards[index] ? 'hidden' : ''}`}>
-                                <RecordsTable tableid={table.tableid} searchTerm={''} ></RecordsTable>
+                                <RecordsTable tableid={table.tableid} searchTerm={''} context='linked'  ></RecordsTable>
                             </div>
                         </>
                     ))}

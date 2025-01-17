@@ -12,7 +12,7 @@ interface RecordsTableProps {
     tableid?: string;
     searchTerm?: string;
     filters?: string;
-    handleRowClick?: (recordid : string) => void;
+    context?: string;
 }
 
 interface ResponseInterface {
@@ -123,11 +123,11 @@ const componentDataDEV: ResponseInterface = {
   };
   
 
-  const RecordsTable: React.FC<RecordsTableProps> = ({ tableid, searchTerm, handleRowClick }) => {
+  const RecordsTable: React.FC<RecordsTableProps> = ({ tableid, searchTerm, context}) => {
     // Dati da usare nel componente
     const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEFAULT);
 
-    const {refreshTable} = useRecordsStore();
+    const {refreshTable,handleRowClick} = useRecordsStore();
 
     // Dati da inviare al backend
     const payload = useMemo(() => ({
@@ -168,7 +168,7 @@ const componentDataDEV: ResponseInterface = {
                             </thead>
                             <tbody>
                                 {data.rows.map((row) => (
-                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" onClick={() => handleRowClick && handleRowClick(row.recordid)}>
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" onClick={() => handleRowClick && tableid && context && handleRowClick(row.recordid, tableid, context)}>
                                         {row.fields.map((field) => (
                                             <td className="px-6 py-4">
                                                 {field.value}

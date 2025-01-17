@@ -2,8 +2,7 @@
 import { create } from 'zustand'
 
 interface RecordsStore {
-
-    refreshTable : number;
+    refreshTable: number;
     setRefreshTable: (refreshTable: number) => void;
 
     cardsList: Array<{
@@ -14,27 +13,23 @@ interface RecordsStore {
     addCard: (tableid: string, recordid: string, type: string) => void;
     removeCard: (tableid: string, recordid: string) => void;
     resetCardsList: () => void;
-    
+
+    handleRowClick: (recordid: string, tableid: string, context: string) => Promise<void>; // Aggiungi quia
 }
 
-export const useRecordsStore = create<RecordsStore>((set) => ({
+export const useRecordsStore = create<RecordsStore>((set, get) => ({
     refreshTable: 0,
     setRefreshTable: (refreshTable: number) => set({ refreshTable }),
 
     cardsList: [],
     addCard: (tableid: string, recordid: string, type: string) => 
         set((state) => {
-            // Verifica se la combinazione esiste già
             const cardExists = state.cardsList.some(
                 (card) => card.tableid === tableid && card.recordid === recordid
             );
-            
-            // Se non esiste, aggiungi la nuova card
             if (!cardExists) {
                 return { cardsList: [...state.cardsList, { tableid, recordid, type }] };
             }
-
-            // Altrimenti, ritorna lo stato invariato
             return state;
         }),
     removeCard: (tableid: string, recordid: string) => 
@@ -44,4 +39,20 @@ export const useRecordsStore = create<RecordsStore>((set) => ({
             ) 
         })),
     resetCardsList: () => set({ cardsList: [] }),
+
+    handleRowClick: async (recordid: string, tableid: string, context: string) => {
+        const { resetCardsList, addCard } = get(); // Ottieni i metodi dallo stato
+        const tableType = 'standard';
+
+        if (tableType === 'standard') {
+            // Rimuovi tutte le card dalla lista
+            await resetCardsList();
+
+            // Aggiungi la nuova card
+            addCard(tableid, recordid, tableType);
+        } else {
+            // Rimuovi la card selezionata
+            addCard(tableid, recordid, tableType);
+        }
+    },
 }));
