@@ -23,12 +23,12 @@ const componentDataDEV: ResponseInterface = {
     linkedTables: [
         {
             tableid: "company",
-            description: "siung",
+            description: "Azienda",
             rowsCount: 1,
         },
         {
-            tableid: "tableid",
-            description: "siung",
+            tableid: "contact",
+            description: "Contatti",
             rowsCount: 1,
         },
         {
