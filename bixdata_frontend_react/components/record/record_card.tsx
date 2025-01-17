@@ -1,5 +1,6 @@
 import { CircleX, Maximize2 } from 'lucide-react';
 import { useState } from 'react';
+import {useEffect} from "react";
 import CardBadge from './card/cardBadge';
 import CardTabs from './card/cardTabs';
 import { useRecordsStore } from '../records/recordsStore';
@@ -15,6 +16,7 @@ const RecordCard: React.FC<RecordCardProps> = ({ tableid, recordid }) => {
   const { removeCard } = useRecordsStore();
   const [animationClass, setAnimationClass] = useState('animate-slide-in');
   const [isMaximized, setIsMaximized] = useState(false);
+  const [mountedTime, setMountedTime] = useState<string>("");
 
   const handleRemoveCard = () => {
     setAnimationClass('animate-slide-out');
@@ -23,12 +25,24 @@ const RecordCard: React.FC<RecordCardProps> = ({ tableid, recordid }) => {
     }, 300); // Durata dell'animazione in ms
   };
 
+  // Calcola e memorizza l'orario in cui il componente è stato montato
+    useEffect(() => {
+        const now = performance.now();
+        const minutes = Math.floor(now / 60000);
+        const seconds = Math.floor((now % 60000) / 1000);
+        const centiseconds = Math.floor((now % 1000) / 10);
+        setMountedTime(`${minutes}:${seconds.toString().padStart(2, '0')}.${centiseconds.toString().padStart(2, '0')}`);
+    }, []);
+    
   return (
     <div
     className={`absolute shadow-2xl right-0 mr-4 bg-gray-100 z-10 rounded-md p-3 ${animationClass} ${
       isMaximized ? ' right-0 w-5/6 h-4/6' : 'w-1/6 h-4/6'
     } transition-all duration-300`}
   >
+    <p>
+        cardFields mounted at: {mountedTime}
+    </p>
       <div className="h-1/6 w-full">
         <p className="text-black">{recordid}</p>
         <p className="text-black">{tableid}</p>

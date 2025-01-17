@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecordsStore } from '@/components/records/recordsStore';
+import { consoleDebug } from '../utils/develop'
 
 export const useApi = <T>(
     payload: Record<string, any>
@@ -12,6 +13,7 @@ export const useApi = <T>(
     useEffect(() => {
         const fetchData = async () => {
             try {
+                consoleDebug('Fetching data with payload:', payload);
                 setLoading(true);
                 setError(null);
 

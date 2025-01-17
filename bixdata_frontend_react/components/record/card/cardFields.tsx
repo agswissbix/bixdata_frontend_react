@@ -12,6 +12,7 @@ import SelectUser from './FieldsInputs/selectUser';
 import SelectStandard from './FieldsInputs/selectStandard';
 import { Toaster, toast } from 'sonner';
 import { Input } from 'postcss';
+import { consoleDebug } from '@/utils/develop';
 
 interface CardFieldsProps {
     tableid: string;
@@ -29,7 +30,8 @@ interface ResponseInterface {
         lookupitems?: Array<{itemcode: string, itemdesc: string, link: string, linkfield: string, linkvalue: string, linkedfield: string, linkedvalue: string}>;
         lookupitemsuser? : Array<{id: string, firstname: string, lastname: string, link: string, linkdefield: string, linkedvalue: string}>;
         settings: string | {calcolato: string, default: string, nascosto: string, obbligatorio: string};
-    }>
+    }>,
+    recordid: string;
 }
 
 const componentDataDEV: ResponseInterface = {
@@ -39,7 +41,7 @@ const componentDataDEV: ResponseInterface = {
             fieldid: "test1",
             fieldorder: "1",
             description: "Test 1",
-            value: { code: 'test1', value: 'test1' },
+            value: { code: 'test3', value: 'test3' },
             fieldtype: "Parola",
             settings: {calcolato: 'false', default: '', nascosto: 'false', obbligatorio: 'false'}
         },
@@ -109,30 +111,44 @@ const componentDataDEV: ResponseInterface = {
             fieldtype: "Checkbox",
             settings: {calcolato: 'false', default: '', nascosto: 'false', obbligatorio: 'false'}
         }
-    ]
+    ],
+    recordid: "0000"
+};
+
+const componentDataDEFAULT: ResponseInterface = {
+    fields: [],
+    recordid: ""
 };
 
 const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
-    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEV);
+    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEFAULT);
+    const [mountedTime, setMountedTime] = useState<string>("");
 
     const payload = useMemo(() => ({
-        apiRoute: 'testpost', // riferimento api per il backend
-        example1: tableid,
-        additionalInfo: {
-            example2: 'example',
-            example3: 'example',
-        },
-    }), [tableid]);
+        apiRoute: 'get_record_fields', // riferimento api per il backend
+        tableid: tableid,
+        recordid: recordid
+    }), [tableid, recordid]);
 
     // Usa l'hook passando il payload
     const { response, loading, error } = useApi<ResponseInterface>(payload);
+    useEffect(() => {
+            if (response) {
+                setComponentData(response);
+            }
+        }, [response]);
+
+    // Sincronizza manualmente quando `componentDataDEV` cambia
+    useEffect(() => {
+        //setComponentData(componentDataDEV);
+    }, [componentDataDEV]);
 
     const handleInputChange = (fieldid: string, newValue: string) => {
-        setComponentData(prevState => ({
-            fields: prevState.fields.map(field =>
-                field.fieldid === fieldid ? { ...field, value: newValue } : field
-            )
-        }));
+        //setComponentData(prevState => ({
+          //  fields: prevState.fields.map(field =>
+            //    field.fieldid === fieldid ? { ...field, value: newValue } : field
+           // )
+        //}));
     };
 
     const payloadSave = useMemo(() => ({
@@ -169,12 +185,27 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
             console.error('Errore durante il salvataggio dei dati:', error);
         }
     }
+    consoleDebug('ComponentData', componentData);
+
+    // Calcola e memorizza l'orario in cui il componente è stato montato
+    useEffect(() => {
+        const now = performance.now();
+        const minutes = Math.floor(now / 60000);
+        const seconds = Math.floor((now % 60000) / 1000);
+        const centiseconds = Math.floor((now % 1000) / 10);
+        setMountedTime(`${minutes}:${seconds.toString().padStart(2, '0')}.${centiseconds.toString().padStart(2, '0')}`);
+    }, []);
 
     return (
         <GenericComponent response={componentData} loading={loading} error={error}> 
         {(data: ResponseInterface) => (
             
             <div className="h-2/3">
+                <p>
+                    cardFields mounted at: {mountedTime}
+                </p>
+                Clicked: {recordid} <br/>
+                Result recordid: {data.recordid}
                 <div className="h-full flex flex-row">
                     <div className="flex-1 flex flex-col">
                         {data.fields.map(field => (
