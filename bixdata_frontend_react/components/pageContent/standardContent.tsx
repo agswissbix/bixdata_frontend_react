@@ -31,12 +31,17 @@ const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
     setRecordid(recordid); // Comunica al componente padre la selezione
     const tableType = 'standard';
     if (tableType === 'standard') {
-    //remove all cards in the cardlist with removeCard
-    resetCardsList();
-    //add the new card to the cardlist with addCard
-    addCard(tableid, recordid, tableType);
+        // Remove all cards in the cardlist with removeCard
+        resetCardsList();
+
+        // Add a delay of 0.5 seconds before adding the new card
+        setTimeout(() => {
+            // Add the new card to the cardlist with addCard
+            addCard(tableid, recordid, tableType);
+        }, 500); // 500 milliseconds = 0.5 seconds
     }
-  };
+};
+
 
   // Funzione callback per aggiornare la ricerca
   const handleSearchChange = (searchTerm: string) => {
