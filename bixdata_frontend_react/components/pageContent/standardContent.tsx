@@ -27,8 +27,17 @@ const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
 
   const {cardsList, addCard, removeCard, resetCardsList} = useRecordsStore(); // Stato per il valore di ricerca
 
-  const handleRowClick = (recordid: string) => {
+  const handleRowClick = async (recordid: string) => {
     setRecordid(recordid); // Comunica al componente padre la selezione
+    const tableType = 'standard';
+    if (tableType === 'standard') {
+        // Remove all cards in the cardlist with removeCard
+        await resetCardsList();
+
+        // Add a delay of 0.5 seconds before adding the new card
+            // Add the new card to the cardlist with addCard
+        addCard(tableid, recordid, tableType);
+    }
 };
 
 useEffect(() => {

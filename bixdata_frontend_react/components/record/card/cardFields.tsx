@@ -41,7 +41,7 @@ const componentDataDEV: ResponseInterface = {
             fieldid: "test1",
             fieldorder: "1",
             description: "Test 1",
-            value: { code: 'test1aaa', value: 'test1aaa' },
+            value: { code: 'test1', value: 'test1' },
             fieldtype: "Parola",
             settings: {calcolato: 'false', default: '', nascosto: 'false', obbligatorio: 'false'}
         },
