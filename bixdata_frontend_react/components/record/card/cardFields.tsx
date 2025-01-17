@@ -200,9 +200,9 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
         <GenericComponent response={componentData} loading={loading} error={error}> 
         {(data: ResponseInterface) => (
             
-            <div className="h-full">
-                <div className="h-full flex flex-row">
-                    <div className="flex-1 flex flex-col">
+            <div className="h-5/6">
+                <div className="h-full flex flex-row overflow-y-scroll">
+                    <div className="flex-1 flex flex-col ">
                         {data.fields.map(field => (
                             <div className="flex-1" key={field.fieldid}>
                                 <p className="text-black">{field.description}</p>
