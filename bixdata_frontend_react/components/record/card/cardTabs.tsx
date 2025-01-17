@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CardFields from './cardFields';
-import CardLinkedToChange from './cardLinkedToChange';
+import CardLinked from './cardLinked';
 import { useRecordsStore } from '@/components/records/recordsStore';
 
 interface CardTabsProps {
@@ -47,7 +47,7 @@ const CardTabs: React.FC<CardTabsProps> = ({ tableid, recordid }) => {
         {activeTab === 'Fields' ? (
           <CardFields tableid={tableid} recordid={recordid} />
         ) : (
-          <CardLinkedToChange masterTableid={tableid} masterRecordid={recordid} />
+          <CardLinked masterTableid={tableid} masterRecordid={recordid} />
         )}
       </div>
     </div>
