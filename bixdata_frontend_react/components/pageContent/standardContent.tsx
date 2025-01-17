@@ -29,14 +29,15 @@ const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
 
   const handleRowClick = (recordid: string) => {
     setRecordid(recordid); // Comunica al componente padre la selezione
-    const tableType = 'standard';
-    if (tableType === 'standard') {
-    //remove all cards in the cardlist with removeCard
-    resetCardsList();
-    //add the new card to the cardlist with addCard
-    addCard(tableid, recordid, tableType);
-    }
-  };
+};
+
+useEffect(() => {
+  if (recordid) {
+    resetCardsList(); // Resetta le schede
+    addCard(tableid, recordid, 'standard'); // Aggiungi la nuova scheda
+  }
+}, [recordid]);
+
 
   // Funzione callback per aggiornare la ricerca
   const handleSearchChange = (searchTerm: string) => {

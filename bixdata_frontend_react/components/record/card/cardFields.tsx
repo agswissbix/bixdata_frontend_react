@@ -41,7 +41,7 @@ const componentDataDEV: ResponseInterface = {
             fieldid: "test1",
             fieldorder: "1",
             description: "Test 1",
-            value: { code: 'test3', value: 'test3' },
+            value: { code: 'test1aaa', value: 'test1aaa' },
             fieldtype: "Parola",
             settings: {calcolato: 'false', default: '', nascosto: 'false', obbligatorio: 'false'}
         },
@@ -200,12 +200,7 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
         <GenericComponent response={componentData} loading={loading} error={error}> 
         {(data: ResponseInterface) => (
             
-            <div className="h-2/3">
-                <p>
-                    cardFields mounted at: {mountedTime}
-                </p>
-                Clicked: {recordid} <br/>
-                Result recordid: {data.recordid}
+            <div className="h-full">
                 <div className="h-full flex flex-row">
                     <div className="flex-1 flex flex-col">
                         {data.fields.map(field => (

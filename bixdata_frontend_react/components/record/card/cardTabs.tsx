@@ -14,7 +14,7 @@ const CardTabs: React.FC<CardTabsProps> = ({ tableid, recordid }) => {
 
   return (
     <div>
-        <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <div className="h-1/6 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
             <ul className="flex flex-wrap -mb-px">
                 <li className="me-2">
                     <a href="#" className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Profile</a>
@@ -31,7 +31,7 @@ const CardTabs: React.FC<CardTabsProps> = ({ tableid, recordid }) => {
             </ul>
         </div>
         
-        <div className="p-4">
+        <div className="h-5/6 p-4">
             <CardFields tableid={tableid} recordid={recordid} />
         </div>
 
