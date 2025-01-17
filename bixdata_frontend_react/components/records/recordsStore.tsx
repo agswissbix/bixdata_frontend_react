@@ -42,7 +42,7 @@ export const useRecordsStore = create<RecordsStore>((set, get) => ({
 
     handleRowClick: async (recordid: string, tableid: string, context: string) => {
         const { resetCardsList, addCard } = get(); // Ottieni i metodi dallo stato
-        const tableType = 'standard';
+        const tableType = context
 
         if (tableType === 'standard') {
             // Rimuovi tutte le card dalla lista
