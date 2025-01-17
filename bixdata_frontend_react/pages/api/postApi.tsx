@@ -31,6 +31,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         else if (postData.apiRoute === 'get_record_fields') {
             response = await axiosInstance.post('/backend_app/get_record_fields/', postData);
         }
+        else if (postData.apiRoute === 'get_record_linked_tables') {
+            response = await axiosInstance.post('/backend_app/get_record_linked_tables/', postData);
+        }
         else {
             return res.status(400).json({ error: 'Invalid apiRoute provided.' });
         }
