@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Card, CardContent } from "@/components/calendars/ui/card";
-import { Button } from "@/components/calendars/ui/button";
-import { Input } from "@/components/calendars/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/calendars/ui/dialog";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Calendar, Clock, Plus } from 'lucide-react';
 
-
-
+// Component types
 type Event = {
   id: string;
   title: string;
@@ -33,6 +32,7 @@ const CalendarComponent = () => {
     color: '#3b82f6'
   });
 
+  // Helper functions
   const getHoursOfDay = () => {
     const hours = [];
     for (let i = 0; i < 24; i++) {
@@ -62,6 +62,7 @@ const CalendarComponent = () => {
     return days;
   };
 
+  // Event handling functions
   const handleDragStart = (event: Event) => {
     setDraggedEvent(event);
   };
@@ -110,6 +111,7 @@ const CalendarComponent = () => {
     });
   };
 
+  // Component rendering functions
   const EventCreator = () => (
     <div className="p-4 border-l border-gray-200">
       <h3 className="text-lg font-semibold mb-4">Crea Nuovo Evento</h3>
@@ -181,7 +183,7 @@ const CalendarComponent = () => {
         setSelectedEvent(event);
         setShowEventDialog(true);
       }}
-      className="p-1 mb-1 rounded text-sm cursor-move"
+      className="p-1 mb-1 rounded text-sm cursor-move text-white"
       style={{
         backgroundColor: event.color,
         opacity: draggedEvent?.id === event.id ? 0.5 : 1,
@@ -362,10 +364,8 @@ const CalendarComponent = () => {
             </Button>
           </div>
         </div>
-        <Card>
-          <CardContent className="p-4">
-            {renderCalendarContent()}
-          </CardContent>
+        <Card className="p-4">
+          {renderCalendarContent()}
         </Card>
         <EventDialog />
       </div>

@@ -7,6 +7,7 @@ import StandardContent from '@/components/pageContent/standardContent';
 import ScheduleCalendar from  '@/components/test/calendar';
 import Agenda from '@/components/calendars/agenda';
 import CalendarComponent from '@/components/calendars/calendar';
+import PitCalendar from '@/components/test/pitcalendar';
 import { Toaster, toast } from 'sonner';
 
 
@@ -25,13 +26,23 @@ const App: React.FC = () => {
       <div className="w-full flex-1 flex">
           <Sidebar setSelectedMenu={(item) => setSelectedMenu(item)} />
           <div className="relative h-full w-11/12 bg-gray-100">
-          {selectedMenu === 'Calendar' ? (
+          {
+          selectedMenu === 'TelAmicoCalendario' ? (
             <ScheduleCalendar />
-          ) : selectedMenu === 'Agenda' ? (
+          ) 
+          : selectedMenu === 'TelAmicoAgenda' ? (
+            <Agenda />
+          ) 
+          : selectedMenu === 'PitCalendar' ? (
+            <PitCalendar />
+          ) 
+          : selectedMenu === 'Calendario' ? (
             <CalendarComponent />
-          ) : (
+          ) 
+          : (
             <StandardContent tableid={selectedMenu} />
-          )}
+          )
+          }
 
         </div>
       </div>

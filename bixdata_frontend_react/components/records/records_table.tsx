@@ -154,7 +154,6 @@ const componentDataDEV: ResponseInterface = {
         <GenericComponent response={componentData} loading={loading} error={error}>
             {(data) => (
                 <div className="h-full">
-                    test:{searchTerm}
                     <div className="w-full h-full relative overflow-auto">
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

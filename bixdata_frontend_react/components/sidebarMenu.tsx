@@ -117,11 +117,17 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({setSelectedMenu}) => {
                 
                         <div id="sidebar" className="bg-gray-800 text-white h-full xl:w-full w-full transition-all duration-300">
                             <ul className="list-none p-0 m-0">
-                            <span className="block px-12 py-2 hover:bg-gray-700 transition-colors" onClick={() => handleMenuClick('Calendar')}> 
-                                    Calendario
+                            <span className="block px-12 py-2 hover:bg-gray-700 transition-colors" onClick={() => handleMenuClick('TelAmicoCalendario')}> 
+                                    Calendario TelAmico
                             </span>
-                            <span className="block px-12 py-2 hover:bg-gray-700 transition-colors" onClick={() => handleMenuClick('Agenda')}> 
-                                    Agenda
+                            <span className="block px-12 py-2 hover:bg-gray-700 transition-colors" onClick={() => handleMenuClick('TelAmicoAgenda')}> 
+                                    Agenda TelAmico
+                            </span>
+                            <span className="block px-12 py-2 hover:bg-gray-700 transition-colors" onClick={() => handleMenuClick('Calendario')}> 
+                                    Agenda TelAmico
+                            </span>
+                            <span className="block px-12 py-2 hover:bg-gray-700 transition-colors" onClick={() => handleMenuClick('PitCalendar')}> 
+                                    PitCalendar
                             </span>
                                     {Object.entries(sidebarMenuData['menuItems']).map(([key, item]) => (
                                     <li key={item.id} className="border-b border-gray-700 relative" onMouseEnter={() => handleMouseEnter(item.id)} onMouseLeave={handleMouseLeave}>
