@@ -7,11 +7,11 @@ import { Calendar, Clock, Plus, Check } from 'lucide-react';
 
 const PitCalendar = () => {
   const [resources] = useState([
-    { id: 'marco', name: 'Marco Rossi' },
-    { id: 'laura', name: 'Laura Bianchi' },
-    { id: 'giuseppe', name: 'Giuseppe Verdi' },
-    { id: 'anna', name: 'Anna Neri' },
-    { id: 'paolo', name: 'Paolo Ferrari' }
+    { id: 'antonijevictoplica', name: 'Antonijevic Toplica' },
+    { id: 'BasarabaTomislav', name: 'Basaraba Tomislav' },
+    { id: 'BerishaBekim', name: 'Berisha Bekim' },
+    { id: 'DokovicDorde', name: 'Dokovic Dorde' },
+    { id: 'FazziLuca', name: 'Fazzi Luca' }
   ]);
   
   const defaultNewEvent = {
@@ -26,21 +26,21 @@ const PitCalendar = () => {
   const [events, setEvents] = useState([
     {
       id: '1',
-      title: 'Meeting con cliente',
-      start: new Date(2025, 0, 21, 10, 0),
-      end: new Date(2025, 0, 21, 11, 30),
-      description: 'Discussione progetto nuovo sito web',
+      title: 'Pulizia completa Condominio Lucino',
+      start: new Date(2025, 0, 7, 10, 0),
+      end: new Date(2025, 0, 7, 11, 30),
+      description: 'Pulizia completa Condominio Lucino',
       color: '#3b82f6',
-      resourceId: 'marco'
+      resourceId: 'antonijevictoplica'
     },
     {
       id: '2',
-      title: 'Revisione design',
-      start: new Date(2025, 0, 21, 14, 0),
-      end: new Date(2025, 0, 21, 15, 0),
-      description: 'Revisione mockup homepage',
+      title: 'Pulizia entrata Residenza Nettuno',
+      start: new Date(2025, 0, 8, 14, 0),
+      end: new Date(2025, 0, 8, 15, 0),
+      description: 'Pulizia entrata Residenza Nettuno',
       color: '#10b981',
-      resourceId: 'laura'
+      resourceId: 'BasarabaTomislav'
     }
   ]);
 
@@ -48,14 +48,14 @@ const PitCalendar = () => {
   const [unplannedEvents, setUnplannedEvents] = useState([
     {
       id: 'u1',
-      title: 'Task di analisi',
-      description: 'Verificare requisiti progetto',
+      title: 'Pulizia finestre Stabile fortuna',
+      description: 'Note aggiuntive',
       color: '#f97316' // arancione
     },
     {
       id: 'u2',
-      title: 'Telefonata con fornitore',
-      description: 'Chiarire dettagli contratto',
+      title: 'Pulizie finestre Lisano 1 Massagno',
+      description: 'Note aggiuntive',
       color: '#8b5cf6' // viola
     }
   ]);
@@ -462,7 +462,7 @@ const PitCalendar = () => {
         {/* CALENDARIO */}
         <Card className="p-4 overflow-auto">
           <div className="grid grid-cols-6 gap-1">
-            <div className="p-2 border-b border-r border-gray-200 bg-red-500 font-semibold">
+            <div className="p-2 border-b border-r border-gray-200 bg-gray-200 font-semibold">
               Dipendenti
             </div>
             {getWorkDaysInWeek(currentDate, selectedWeek).map(day => (
