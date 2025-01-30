@@ -37,6 +37,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         else if (postData.apiRoute === 'create_pdf') {
             response = await axiosInstance.post('/backend_app/create_pdf/', postData);
         }
+        else if (postData.apiRoute === 'test_linkedmaster') {
+            response = await axiosInstance.post('/backend_app/test_linkedmaster/', postData);
+        }
         else {
             return res.status(400).json({ error: 'Invalid apiRoute provided.' });
         }

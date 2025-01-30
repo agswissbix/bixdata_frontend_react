@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 
 interface SelectStandardProps {
   lookupItems: Array<{ itemcode: string; itemdesc: string }>;
@@ -18,6 +19,16 @@ const SelectStandard: React.FC<SelectStandardProps> = ({ lookupItems, initialVal
   return (
     <div>
       <div className="mt-2">
+        {/*
+        <Select 
+        defaultValue={lookupItems.filter(item => item.itemcode === initialValue)}
+        isMulti={true}
+        name = "items"
+        className='basic-multi-select'
+        classNamePrefix={"select"}
+
+        />
+        */}
         <select
           value={value}
           onChange={(e) => setValue(e.target.value)}

@@ -8,6 +8,7 @@ import InputNumber from './FieldsInputs/inputNumber';
 import InputDate from './FieldsInputs/inputDate';
 import InputMemo from './FieldsInputs/inputMemo';
 import InputCheckbox from './FieldsInputs/inputCheckbox';
+import InputLinked from './FieldsInputs/inputLinked';
 import SelectUser from './FieldsInputs/selectUser';
 import SelectStandard from './FieldsInputs/selectStandard';
 import { Toaster, toast } from 'sonner';
@@ -29,6 +30,7 @@ interface ResponseInterface {
         fieldtype: string;
         lookupitems?: Array<{itemcode: string, itemdesc: string, link: string, linkfield: string, linkvalue: string, linkedfield: string, linkedvalue: string}>;
         lookupitemsuser? : Array<{id: string, firstname: string, lastname: string, link: string, linkdefield: string, linkedvalue: string}>;
+        linked_mastertable?: string;
         settings: string | {calcolato: string, default: string, nascosto: string, obbligatorio: string};
     }>,
     recordid: string;
@@ -41,8 +43,9 @@ const componentDataDEV: ResponseInterface = {
             fieldid: "test1",
             fieldorder: "1",
             description: "Test 1",
-            value: { code: 'test1', value: 'test1' },
-            fieldtype: "Parola",
+            value: { code: '00000000000000000000000000000415', value: 'test1' },
+            fieldtype: "linkedmaster",
+            linked_mastertable: "contact",
             settings: {calcolato: 'false', default: '', nascosto: 'false', obbligatorio: 'false'}
         },
         {
@@ -121,7 +124,7 @@ const componentDataDEFAULT: ResponseInterface = {
 };
 
 const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
-    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEFAULT);
+    const [componentData, setComponentData] = useState<ResponseInterface>(componentDataDEV);
     const [mountedTime, setMountedTime] = useState<string>("");
 
     const payload = useMemo(() => ({
@@ -134,7 +137,7 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
     const { response, loading, error } = useApi<ResponseInterface>(payload);
     useEffect(() => {
             if (response) {
-                setComponentData(response);
+                setComponentData(componentDataDEV);
             }
         }, [response]);
 
@@ -209,9 +212,9 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
                             </div>
                         ))}
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 flex flex-col">
                     {data.fields.map(field => (
-                        <div key={field.fieldid}>
+                        <div key={field.fieldid} className="flex-1">
                             {field.fieldtype === 'Parola' ? (
                                 <InputWord 
                                     initialValue={typeof field.value === 'object' ? field.value.code : field.value} 
@@ -251,6 +254,13 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
                                     }))}
                                     initialValue={typeof field.value === 'object' ? field.value.code : field.value}
                                     onChange={(value: string) => handleInputChange(field.fieldid, value)}
+                                />
+                            ) : field.fieldtype === 'linkedmaster' ? (
+                                <InputLinked 
+                                    initialValue={typeof field.value === 'object' ? field.value.code : field.value} 
+                                    onChange={(value: string) => handleInputChange(field.fieldid, value)}
+                                    linkedmaster_tableid={field.linked_mastertable}
+                                    linkedmaster_recordid={typeof field.value === 'object' ? field.value.code : field.value}
                                 />
                               ) : null}
                         </div>
