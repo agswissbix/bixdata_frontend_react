@@ -65,9 +65,15 @@ useEffect(() => {
         </div>  
       </div>
 
-        {cardsList.map(card => (
-          <RecordCard tableid={card.tableid} recordid={card.recordid}></RecordCard>
-        ))}
+{cardsList.map((card, index) => (
+    <RecordCard 
+        key={`${card.tableid}-${card.recordid}`}
+        tableid={card.tableid} 
+        recordid={card.recordid}
+        index={index}
+        total={cardsList.length}
+    />
+))}
 
 
       <div><RecordTabs tableid={tableid} searchTerm={searchTerm}></RecordTabs></div>
