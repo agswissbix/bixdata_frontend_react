@@ -60,11 +60,11 @@ const PitCalendar = () => {
     }
   ]);
 
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState<{ id: string; title: string; start: Date; end: Date; description: string; color: string; resourceId: string } | null>(null);
   const [showEventDialog, setShowEventDialog] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date(2025, 0, 21));
-  const [draggedEvent, setDraggedEvent] = useState(null);
-  const [selectedResourceIds, setSelectedResourceIds] = useState([]);
+  const [draggedEvent, setDraggedEvent] = useState<{ id: string; title: string; description: string; color: string; start?: Date; end?: Date } | null>(null);
+  const [selectedResourceIds, setSelectedResourceIds] = useState<string[]>([]);
   const [showResourcesDropdown, setShowResourcesDropdown] = useState(false);
   const [newEvent, setNewEvent] = useState(defaultNewEvent);
   const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth());
@@ -73,7 +73,7 @@ const PitCalendar = () => {
   const [selectedWeek, setSelectedWeek] = useState(1);
 
   // Componente WeekDropdown
-  const WeekDropdown = ({ selectedWeek, onWeekChange }) => {
+  const WeekDropdown: React.FC<{ selectedWeek: number, onWeekChange: (week: number) => void }> = ({ selectedWeek, onWeekChange }) => {
     return (
       <select
         className="w-48 p-2 border rounded"
@@ -94,7 +94,7 @@ const PitCalendar = () => {
     : resources;
 
   // Modifichiamo la funzione in modo da gestire il "selectedWeek"
-  const getWorkDaysInWeek = (date, week) => {
+  const getWorkDaysInWeek = (date: Date, week: number) => {
     // Primo giorno del mese
     const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     
@@ -123,7 +123,7 @@ const PitCalendar = () => {
   };
 
   // Drag di un evento non pianificato
-  const handleUnplannedDragStart = (e, event) => {
+  const handleUnplannedDragStart = (e: React.DragEvent, event: { id: string; title: string; description: string; color: string }) => {
     e.stopPropagation();
     setDraggedEvent(event);
 
@@ -164,7 +164,7 @@ const PitCalendar = () => {
   };
 
   // Drag di un evento già pianificato
-  const handleDragStart = (e, event) => {
+  const handleDragStart = (e: React.DragEvent, event: { id: string; title: string; description: string; color: string; start?: Date; end?: Date }) => {
     e.stopPropagation();
     setDraggedEvent(event);
 
@@ -184,7 +184,7 @@ const PitCalendar = () => {
   };
 
   // Drop di un evento in calendario (sia pianificato che non pianificato)
-  const handleDrop = useCallback((dropDate, newResourceId) => {
+  const handleDrop = useCallback((dropDate: Date, newResourceId: string) => {
     if (!draggedEvent) return;
 
     // Durata di default 1 ora se l'evento non era pianificato
@@ -238,7 +238,7 @@ const PitCalendar = () => {
     setDraggedEvent(null);
   }, [draggedEvent, events]);
 
-  const formatEventTime = (date) => {
+  const formatEventTime = (date: Date) => {
     return date.toLocaleTimeString('it-IT', { 
       hour: '2-digit', 
       minute: '2-digit',
@@ -261,7 +261,7 @@ const PitCalendar = () => {
           value={newEvent.start.toISOString().slice(0, 16)}
           onChange={(e) => {
             const date = new Date(e.target.value);
-            if (!isNaN(date)) {
+            if (!isNaN(date.getTime())) {
               setNewEvent(prev => ({...prev, start: date}));
             }
           }}
@@ -271,7 +271,7 @@ const PitCalendar = () => {
           value={newEvent.end.toISOString().slice(0, 16)}
           onChange={(e) => {
             const date = new Date(e.target.value);
-            if (!isNaN(date)) {
+            if (!isNaN(date.getTime())) {
               setNewEvent(prev => ({...prev, end: date}));
             }
           }}
@@ -307,13 +307,13 @@ const PitCalendar = () => {
   );
 
   // Dropdown risorse (memo)
-  const ResourcesDropdown = React.memo(({ selectedIds, onSelectionChange }) => {
+  const ResourcesDropdown: React.FC<{ selectedIds: string[], onSelectionChange: (ids: string[]) => void }> = React.memo(({ selectedIds, onSelectionChange }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const dropdownRef = React.useRef(null);
+    const dropdownRef = React.useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
           setIsOpen(false);
         }
       };
@@ -365,7 +365,7 @@ const PitCalendar = () => {
   });
 
   // Dropdown mese
-  const MonthDropdown = ({ selectedMonth, onMonthChange }) => {
+  const MonthDropdown: React.FC<{ selectedMonth: number, onMonthChange: (month: number) => void }> = ({ selectedMonth, onMonthChange }) => {
     const months = [
       { value: 0, label: "Gennaio" },
       { value: 1, label: "Febbraio" },
@@ -396,7 +396,7 @@ const PitCalendar = () => {
     );
   };
 
-  const handleMonthChange = (month) => {
+  const handleMonthChange = (month: number) => {
     const newDate = new Date(currentDate);
     newDate.setMonth(month);
     // Evitiamo problemi se la data corrente è oltre il numero di giorni del mese
@@ -503,7 +503,7 @@ const PitCalendar = () => {
                         event.resourceId === resource.id &&
                         event.start.toDateString() === day.toDateString()
                       )
-                      .sort((a, b) => a.start - b.start)
+                      .sort((a, b) => a.start.getTime() - b.start.getTime())
                       .map(event => (
                         <div
                           key={event.id}

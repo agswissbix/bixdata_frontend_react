@@ -10,7 +10,7 @@ import TableSettings from '@/components/settings/table/tableSettings';
 import FieldSettings from '@/components/settings/table/fieldSettings';
 
 const TablesList = dynamic(() => import("@/components/settings/table/tablesList"), {
-    suspense: true,
+    ssr: false,
     loading: () => <LoadingComp /> // Aggiungi questo
 });
     

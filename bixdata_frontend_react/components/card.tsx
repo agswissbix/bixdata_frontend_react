@@ -59,7 +59,7 @@ const CardComp: React.FC<CardCompProps> = ({
     };
 
     const tabContent: Record<string, React.ReactNode> = {
-        fields: <CardFields />,
+        fields: <CardFields/>,
         linked: <CardLinked />,
     };
     

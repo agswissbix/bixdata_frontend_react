@@ -14,6 +14,13 @@ interface TestContentProps {
     menuItem: string;
 }
 
+interface GenericComponentProps<T> {
+    data: T | null;
+    loading: boolean;
+    error: string | null;
+    children: (data: T | null) => React.ReactNode;
+}
+
 const TestContent: React.FC<TestContentProps> = ({ menuItem }) => {
     // Memoizza il payload completo per evitare ricreazioni
     const payload = useMemo(() => ({
@@ -26,11 +33,11 @@ const TestContent: React.FC<TestContentProps> = ({ menuItem }) => {
     }), [menuItem]);
 
     // Usa l'hook passando il payload
-    const { data: response, loading, error } = useApi<ResponseData>(payload);
+    const { response, loading, error } = useApi<ResponseData>(payload);
 
 
     return (
-        <GenericComponent data={response} loading={loading} error={error}>
+        <GenericComponent<ResponseData>  loading={loading} error={error}>
             {(data) => (
                 <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
                 <h1>Profile</h1>

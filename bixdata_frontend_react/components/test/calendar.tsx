@@ -9,7 +9,14 @@ const ScheduleCalendar = () => {
   const [draggedItem, setDraggedItem] = useState(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSlot, setActiveSlot] = useState(null);
+  interface ActiveSlot {
+    dayIndex: number;
+    slotIndex: number;
+    slot: Slot | null;
+    timeSlot: string;
+  }
+
+  const [activeSlot, setActiveSlot] = useState<ActiveSlot | null>(null);
   const [formData, setFormData] = useState({ name: '', shift: '', dev: '' });
 
   const months = [
@@ -33,13 +40,27 @@ const ScheduleCalendar = () => {
     { value: 'C', label: 'Chiasso' }
   ];
 
-  const [scheduleData, setScheduleData] = useState([]);
+  interface Slot {
+    id: string;
+    name: string;
+    shift: string;
+    dev: string;
+  }
+  
+  interface Day {
+    day: number;
+    dayName: string;
+    dayType: string;
+    slots: (Slot | null)[];
+  }
+  
+  const [scheduleData, setScheduleData] = useState<Day[]>([]);
 
   useEffect(() => {
     loadMonthData(currentYear, currentMonth);
   }, [currentYear, currentMonth]);
 
-  const loadMonthData = (year, month) => {
+  const loadMonthData = (year: number, month: number) => {
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const newScheduleData = [];
 
@@ -69,7 +90,7 @@ const ScheduleCalendar = () => {
     setScheduleData(newScheduleData);
   };
 
-  const openModal = (slot, dayIndex, slotIndex) => {
+  const openModal = (slot: Slot | null, dayIndex: number, slotIndex: number) => {
     setActiveSlot({ dayIndex, slotIndex, slot, timeSlot: timeSlots[slotIndex] });
     setFormData(slot ? { 
       name: slot.name, 
@@ -83,7 +104,7 @@ const ScheduleCalendar = () => {
     setIsModalOpen(true);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -97,6 +118,7 @@ const ScheduleCalendar = () => {
 
   const handleFormSubmit = () => {
     const newSchedule = [...scheduleData];
+    if (!activeSlot) return;
     const { dayIndex, slotIndex } = activeSlot;
 
     newSchedule[dayIndex].slots[slotIndex] = {
@@ -108,11 +130,11 @@ const ScheduleCalendar = () => {
     setIsModalOpen(false);
   };
 
-  const isFullyBooked = (slots) => {
+  const isFullyBooked = (slots: (Slot | null)[]) => {
     return slots.every(slot => slot !== null);
   };
 
-  const getCellClassName = (slot) => {
+  const getCellClassName = (slot: Slot | null) => {
     const baseClasses = 'py-2 px-4 border-l cursor-pointer';
     if (!slot) return baseClasses;
     
@@ -258,7 +280,7 @@ const ScheduleCalendar = () => {
               <div className="bg-white p-6 rounded shadow-lg w-[90%] max-w-md">
                 <h2 className="text-lg font-bold mb-4">Modifica Sede</h2>
                 <div className="mb-4 text-sm text-gray-600">
-                  Fascia oraria: {activeSlot.timeSlot}
+                  Fascia oraria: {activeSlot ? activeSlot.timeSlot : ''}
                 </div>
                 <div className="mb-4">
                   <label className="block mb-2">Nome Volontario</label>

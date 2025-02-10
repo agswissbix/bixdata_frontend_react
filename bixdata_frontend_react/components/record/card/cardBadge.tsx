@@ -6,8 +6,8 @@ import GenericComponent from '../../genericComponent';
 import { consoleDebug } from '../../../utils/develop'
 
 interface propsInterface {
-    tableid: string;
-    recordid: string;
+    tableid?: string;
+    recordid?: string;
 }
 
 interface ResponseInterface {

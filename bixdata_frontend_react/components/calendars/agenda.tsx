@@ -4,11 +4,11 @@ const WorkSchedule = () => {
   const [startDate, setStartDate] = useState('2024-10-08');
   const [endDate, setEndDate] = useState('2025-01-08');
   const [selectedVolunteer, setSelectedVolunteer] = useState('');
-  const [shifts, setShifts] = useState([]);
+  const [shifts, setShifts] = useState<{ date: Date; time: string; location: string; person: string; }[]>([]);
 
   const volunteers = ['SILVIA', 'GABRIELE', 'RENATA', 'ANAIS', 'GRAZIANO'];
 
-  const getDatesInRange = (start, end) => {
+  const getDatesInRange = (start: string, end: string) => {
     const dates = [];
     const currentDate = new Date(start);
     const endDateTime = new Date(end);
@@ -20,7 +20,7 @@ const WorkSchedule = () => {
     return dates;
   };
 
-  const generateShifts = (date) => {
+  const generateShifts = (date: Date) => {
     const defaultShifts = [
       { time: '07.30-11.30', location: 'Lugano', person: 'SILVIA' },
       { time: '11.30-15.30', location: 'Lugano', person: 'GABRIELE' },
@@ -47,7 +47,7 @@ const WorkSchedule = () => {
     setShifts(allShifts);
   }, [startDate, endDate, selectedVolunteer]);
 
-  const formatDate = (date) => {
+  const formatDate = (date: Date) => {
     const months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
     const days = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
     

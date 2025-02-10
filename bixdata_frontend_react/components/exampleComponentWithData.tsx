@@ -15,7 +15,7 @@ interface ResponseInterface {
     dataExample2: string;
 }
 
-// RESPONSE DI ESEMPIO PER LO SVILUPPO
+// RESPONSE DI DEFAULT
 const componentDataDEFAULT: ResponseInterface = {
     dataExample1: 0,
     dataExample2: ""

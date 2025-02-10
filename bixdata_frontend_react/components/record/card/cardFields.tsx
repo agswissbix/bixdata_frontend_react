@@ -16,8 +16,8 @@ import { Input } from 'postcss';
 import { consoleDebug } from '@/utils/develop';
 
 interface CardFieldsProps {
-    tableid: string;
-    recordid: string;
+    tableid?: string;
+    recordid?: string;
 }
 
 interface ResponseInterface {

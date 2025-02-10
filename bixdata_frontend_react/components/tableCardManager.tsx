@@ -44,6 +44,9 @@ const TableCardManager: React.FC<TableCardManagerProps> = ({ tableid }) => {
                     }`}
                 >
                     <CardComp
+                        recorid={tableid}
+                        tableid={tableid}
+                        fullscreenCard={fullscreenCard}
                         openCards={openCards}
                         closingCard={closingCard}
                         onCloseCard={handleCloseCard}
