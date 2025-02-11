@@ -19,7 +19,7 @@ const RecordTabs: React.FC<RecordTabsProps> = ({ tableid, searchTerm }) => {
             <a
               href="#"
               aria-current="page"
-              className="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+              className="inline-block p-4 text-primary bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
             >
               Tabella
             </a>

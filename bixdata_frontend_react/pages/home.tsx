@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Sidebar from '../components/sidebar';
 import Navbar from '../components/navbar';
 import TableCardManager from '../components/tableCardManager';
@@ -9,44 +9,72 @@ import Agenda from '@/components/calendars/agenda';
 import CalendarComponent from '@/components/calendars/calendar';
 import PitCalendar from '@/components/test/pitcalendar';
 import { Toaster, toast } from 'sonner';
+import { useApi } from '../utils/useApi';
+import GenericComponent from '../components/genericComponent';
 
+
+
+
+interface ResponseInterface {
+  theme?: string;
+}
 
 // Main App Component
 const App: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<string>('Home');
 
+
+  const changeTheme = (theme: string) => {
+    document.documentElement.className = ""; // Rimuove tutte le classi esistenti
+    document.documentElement.classList.add(theme); // Aggiunge il nuovo tema
+  };
+  
+
+  const payload = useMemo(() => ({
+    apiRoute: 'get_user_theme',
+    example1: 'example',
+    userid: '15',
+  }), []);
+
+  const { response, loading, error } = useApi<ResponseInterface>(payload);
+
   const handleMenuClick = (menuName: string): void => {
     setSelectedMenu(menuName);
   };
 
-  return (
-    <div className="w-full h-full flex flex-col">
-      <Toaster richColors />
-      <Navbar />
-      <div className="w-full flex-1 flex">
-          <Sidebar setSelectedMenu={(item) => setSelectedMenu(item)} />
-          <div className="relative h-full w-11/12 bg-gray-100">
-          {
-          selectedMenu === 'TelAmicoCalendario' ? (
-            <ScheduleCalendar />
-          ) 
-          : selectedMenu === 'TelAmicoAgenda' ? (
-            <Agenda />
-          ) 
-          : selectedMenu === 'PitCalendar' ? (
-            <PitCalendar />
-          ) 
-          : selectedMenu === 'Calendario' ? (
-            <CalendarComponent />
-          ) 
-          : (
-            <StandardContent tableid={selectedMenu} />
-          )
-          }
+  useEffect(() => {
+    if (response) {
+      changeTheme(response);
+    }
+  }, [response]);
 
+  return (
+        <div className="w-full h-full flex flex-col">
+          <Toaster richColors />
+          <Navbar />
+          <div className="w-full flex-1 flex">
+              <Sidebar setSelectedMenu={(item) => setSelectedMenu(item)} />
+              <div className="relative h-full w-11/12 bg-gray-100">
+              {
+              selectedMenu === 'TelAmicoCalendario' ? (
+                <ScheduleCalendar />
+              )
+              : selectedMenu === 'TelAmicoAgenda' ? (
+                <Agenda />
+              ) 
+              : selectedMenu === 'PitCalendar' ? (
+                <PitCalendar />
+              ) 
+              : selectedMenu === 'Calendario' ? (
+                <CalendarComponent />
+              ) 
+              : (
+                <StandardContent tableid={selectedMenu} />
+              )
+              }
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
   );
 };
 

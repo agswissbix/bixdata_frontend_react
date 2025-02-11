@@ -115,7 +115,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({setSelectedMenu}) => {
         <GenericComponent response={response} loading={loading} error={error}> 
             {(data) => (
                 
-                        <div id="sidebar" className="bg-gray-800 text-white h-full xl:w-full w-full transition-all duration-300">
+                        <div id="sidebar" className="bg-sidebar text-white h-full xl:w-full w-full transition-all duration-300">
                             <ul className="list-none p-0 m-0">
                             <span className="block px-12 py-2 hover:bg-gray-700 transition-colors" onClick={() => handleMenuClick('TelAmicoCalendario')}> 
                                     Calendario TelAmico
@@ -134,7 +134,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({setSelectedMenu}) => {
                                         {item.subItems ? (
                                             // Dropdown section
                                             <div>
-                                                <button onClick={() => setOpenDropdown(openDropdown === item.id ? '' : item.id)} className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-700 transition-colors" >
+                                                <button onClick={() => setOpenDropdown(openDropdown === item.id ? '' : item.id)} className="w-full flex items-center justify-between px-6 py-4 hover:text-primary focus:text-primary transition-colors" >
                                                     <div className="flex items-center min-w-[20px]">
                                                         <item.icon className="w-5 h-5 min-w-[20px]"/>
                                                         <span className="ml-3 xl:opacity-100 opacity-0 transition-opacity duration-300">{item.title}</span>
@@ -165,13 +165,13 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({setSelectedMenu}) => {
                                                 {/* Dropdown menu for desktop */}
                                                 <div
                                                     className={`xl:block hidden overflow-hidden transition-all duration-300 ease-in-out ${
-                                                        openDropdown === item.id ? 'max-h-48' : 'max-h-0'
+                                                        openDropdown === item.id ? 'max-h-[800]' : 'max-h-0'
                                                     }`}
                                                 >
-                                                    <ul className="bg-gray-900 py-2">
+                                                    <ul className="py-2 ml-6">
                                                         {item.subItems.map((subItem) => (
-                                                            <li key={subItem.id}>
-                                                                <span className="block px-12 py-2 hover:bg-gray-700 transition-colors" onClick={() => handleMenuClick(subItem.id)}> 
+                                                            <li key={subItem.id} className='cursor-pointer'>
+                                                                <span className="block px-12 py-2 hover:text-primary transition-colors" onClick={() => handleMenuClick(subItem.id)}> 
                                                                     {subItem.title}
                                                                 </span>
                                                             </li>

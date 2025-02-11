@@ -23,7 +23,7 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
     return (
-        <Disclosure id="navbar" as="nav" className="bg-gray-800 w-full h-16" data-headless-ui-state="">
+        <Disclosure id="navbar" as="nav" className="bg-navbar w-full h-16" data-headless-ui-state="">
             <div className="mx-auto w-full px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

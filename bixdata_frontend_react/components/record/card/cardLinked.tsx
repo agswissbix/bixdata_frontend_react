@@ -105,7 +105,7 @@ const CardLinked: React.FC<propsInterface> = ({ masterTableid, masterRecordid })
     return (
         <GenericComponent response={componentData} loading={loading} error={error}>
             {(data) => (
-                <div className="h-full w-full flex flex-col">
+                <div className="h-full w-full flex flex-col overflow-y-auto">
                     {data.linkedTables.map((table, index) => (
                         <>
                             <div 
@@ -113,7 +113,7 @@ const CardLinked: React.FC<propsInterface> = ({ masterTableid, masterRecordid })
                                 onClick={() => handleCollapse(index)}
                             >
                                 <div className="w-full">
-                                    <span className="float-start bg-bixcolor-light text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded">{table.rowsCount}</span>
+                                    <span className="float-start bg-primary text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded">{table.rowsCount}</span>
                                     <p className="text-black float-start">{table.description}</p>
                                     <ChevronDown className={`text-gray-400 float-end transform transition-transform ${openCards[index] ? 'rotate-180' : ''}`}/>
                                 </div>

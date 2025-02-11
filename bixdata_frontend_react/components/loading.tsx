@@ -1,8 +1,8 @@
-import SyncLoader from "react-spinners/SyncLoader";
+import GridLoader from "react-spinners/GridLoader";
 export default function LoadingComp() {
     return(
         <div className={"w-full h-full flex justify-center items-center"}>
-            <SyncLoader color={"#6e857e"} margin={20} />
+            <GridLoader color={"#6e857e"} margin={2} />
         </div>
     )
 }

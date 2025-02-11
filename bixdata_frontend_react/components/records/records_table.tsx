@@ -167,7 +167,7 @@ const componentDataDEV: ResponseInterface = {
                             </thead>
                             <tbody>
                                 {data.rows.map((row) => (
-                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" onClick={() => handleRowClick && tableid && context && handleRowClick(row.recordid, tableid, context)}>
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer" onClick={() => handleRowClick && tableid && context && handleRowClick(row.recordid, tableid, context)}>
                                         {row.fields.map((field) => (
                                             <td className="px-6 py-4">
                                                 {field.value}

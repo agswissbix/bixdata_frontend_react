@@ -20,7 +20,7 @@ const CardTabs: React.FC<CardTabsProps> = ({ tableid, recordid }) => {
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg transition-all duration-300 ${
                 activeTab === 'Fields'
-                  ? 'text-blue-600 border-blue-600'
+                  ? 'text-primary border-primary'
                   : 'text-gray-500 border-transparent hover:text-gray-600 hover:border-gray-300'
               }`}
               onClick={() => setActiveTab('Fields')}
@@ -32,7 +32,7 @@ const CardTabs: React.FC<CardTabsProps> = ({ tableid, recordid }) => {
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg transition-all duration-300 ${
                 activeTab === 'Linked'
-                  ? 'text-blue-600 border-blue-600'
+                  ? 'text-primary border-primary'
                   : 'text-gray-500 border-transparent hover:text-gray-600 hover:border-gray-300'
               }`}
               onClick={() => setActiveTab('Linked')}

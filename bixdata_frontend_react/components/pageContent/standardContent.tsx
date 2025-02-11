@@ -26,9 +26,13 @@ const StandardContent: React.FC<ContentProps> = ({ tableid }) => {
   const {refreshTable, setRefreshTable} = useRecordsStore(); // Stato per il valore di ricerca
 
   const {cardsList, addCard, removeCard, resetCardsList, handleRowClick} = useRecordsStore(); // Stato per il valore di ricerca
-
-
-
+  
+  
+  const changeTheme = (theme: "root" | "theme-test") => {
+    document.documentElement.classList.remove("root", "theme-test");
+    document.documentElement.classList.add(`${theme}`);
+  };
+  
 
 
 useEffect(() => {
@@ -50,6 +54,9 @@ useEffect(() => {
 
   return (
     <div className="h-full w-full shadow-2xl bg-white rounded-lg p-4">
+      <button onClick={() => changeTheme('theme-test')} className='bg-blue-500 text-white p-2 rounded-lg'>
+        cambia tema
+      </button>
       {/*
       <h2>Contenuto</h2>
       <p>Hai selezionato: <strong>{tableid}</strong></p>

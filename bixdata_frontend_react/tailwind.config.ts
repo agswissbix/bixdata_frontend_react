@@ -9,12 +9,14 @@ export default {
   ],
   theme: {
   	extend: {
+		backgroundImage: {
+			sidebar: 'var(--sidebar-background)',
+		},
   		colors: {
-  			bixcolor: {
-  				default: '#074048',
-  				light: '#006664'
-  			},
-  			background: 'hsl(var(--background))',
+			navbar: 'var(--navbar-background)',
+			primary: 'var(--color-primary)',
+			secondary: 'var(--color-secondary)',
+  			background: 'var(--background)',
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
@@ -23,14 +25,6 @@ export default {
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',
   				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
   			},
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
