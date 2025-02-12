@@ -30,6 +30,7 @@ interface ResponseInterface {
         fieldtype: string;
         lookupitems?: Array<{itemcode: string, itemdesc: string, link: string, linkfield: string, linkvalue: string, linkedfield: string, linkedvalue: string}>;
         lookupitemsuser? : Array<{id: string, firstname: string, lastname: string, link: string, linkdefield: string, linkedvalue: string}>;
+        fieldtypewebid?: string;
         linked_mastertable?: string;
         settings: string | {calcolato: string, default: string, nascosto: string, obbligatorio: string};
     }>,
@@ -87,8 +88,15 @@ const componentDataDEV: ResponseInterface = {
             fieldtype: "Utente",
             lookupitemsuser: [
                 {id: '1', firstname: 'Mario', lastname: 'Rossi', link: 'user', linkdefield: 'id', linkedvalue: '1'},
-                {id: '2', firstname: 'Luca', lastname: 'Bianchi', link: 'user', linkdefield: 'id', linkedvalue: '2'}
+                {id: '2', firstname: 'Luca', lastname: 'Bianchi', link: 'user', linkdefield: 'id', linkedvalue: '2'},
+                {id: '3', firstname: 'Mario', lastname: 'Rossi', link: 'user', linkdefield: 'id', linkedvalue: '3'},
+                {id: '4', firstname: 'Mario', lastname: 'Rossi', link: 'user', linkdefield: 'id', linkedvalue: '4'},
+                {id: '5', firstname: 'Mario', lastname: 'Rossi', link: 'user', linkdefield: 'id', linkedvalue: '5'},
+
+
+
             ],
+            fieldtypewebid: "multiselect",
             settings: {calcolato: 'false', default: '', nascosto: 'false', obbligatorio: 'false'}
 
         },
@@ -146,7 +154,7 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
         //setComponentData(componentDataDEV);
     }, [componentDataDEV]);
 
-    const handleInputChange = (fieldid: string, newValue: string) => {
+    const handleInputChange = (fieldid: string, newValue: string | string[]) => {
         //setComponentData(prevState => ({
           //  fields: prevState.fields.map(field =>
             //    field.fieldid === fieldid ? { ...field, value: newValue } : field
@@ -245,6 +253,7 @@ const CardFields: React.FC<CardFieldsProps> = ({ tableid, recordid }) => {
                                   lookupItems={field.lookupitemsuser}
                                   initialValue={typeof field.value === 'object' ? field.value.code : field.value}
                                   onChange={(value: string) => handleInputChange(field.fieldid, value)}
+                                  isMulti={field.fieldtypewebid === 'multiselect'}
                                 />
                             ) : field.fieldtype === 'Categoria' && field.lookupitems ? (
                                 <SelectStandard
