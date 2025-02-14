@@ -81,7 +81,6 @@ const CardBadge: React.FC<propsInterface> = ({ tableid, recordid }) => {
                         ))}
                     </div>
                 </div>
-
             )}
         </GenericComponent>
     );
