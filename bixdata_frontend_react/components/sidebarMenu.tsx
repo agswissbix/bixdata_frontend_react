@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import {useState} from "react";
 import {useEffect} from "react";
-import '../app/globals.css'
+import '@/app/globals.css';
 import { useApi } from '../utils/useApi';
 import GenericComponent from './genericComponent';
 import { Home, Package, Mail, ChevronDown, ChevronUp } from 'lucide-react';
